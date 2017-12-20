@@ -1,8 +1,8 @@
-###dotfiles collection
+### dotfiles collection
 
 This is my dotfiles collection, a set of configuration files I use to customize tools used in a daily basis.
 
-###How do I use these files?
+### How do I use these files?
 
 ```sh
 mkdir ~/git
@@ -20,6 +20,6 @@ ln -sf ~/git/dotfiles/Xresources ~/.Xresources
 ln -sf ~/git/dotfiles/zim ~/.config/zim
 ```
 
-###Credits
+### Credits
 
 These dotfiles are heavily based on Antonio Dias work at https://github.com/accdias
