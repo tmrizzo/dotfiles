@@ -9,6 +9,6 @@ rcomments ()
 
 # Filter iostat 10th column for values greater than 10
 iosvctm ()
-}
+{
   awk '/^(sd|dm-)/ { if ( $10 > 10 ) print $0 }' $1
 }
