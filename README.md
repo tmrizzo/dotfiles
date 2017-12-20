@@ -14,6 +14,7 @@ ln -v -sf ~/git/dotfiles/bashrc.d ~/.bashrc.d
 ln -v -sf ~/git/dotfiles/gitconfig ~/.gitconfig
 ln -v -sf ~/git/dotfiles/vimrc ~/.vimrc
 ln -v -sf ~/git/dotfiles/vim ~/.vim
+ln -v -sf ~/git/dotfiles/tmux.conf ~/.tmux.conf
 ```
 
 ### Credits
