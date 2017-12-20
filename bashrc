@@ -49,9 +49,6 @@ shopt -s histappend
 #
 shopt -s checkwinsize
 
-# Completion options
-[[ "$OSTYPE" == "cygwin" ]] && shopt -s completion_strip_exe
-#
 # These completion tuning parameters change the default behavior of bash_completion:
 #
 # Define to access remotely checked-out files over passwordless ssh for CVS
@@ -65,6 +62,7 @@ shopt -s checkwinsize
 #
 # Uncomment to turn on programmable completion enhancements.
 # Any completions you add in ~/.bash_completion are sourced last.
+[[ -f /etc/profile.d/bash_completion.sh ]] && . /etc/profile.d/bash_completion.sh
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 # History Options
@@ -94,6 +92,9 @@ export TERM=xterm-256color
 #
 # Some people use a different file for functions
 [[ -f "${HOME}/.bashrc.d/bash_functions" ]] && . "${HOME}/.bashrc.d/bash_functions"
+#
+# Regular expressions
+[[ -f "${HOME}/.bashrc.d/bash_regex" ]] && . "${HOME}/.bashrc.d/bash_regex"
 
 # Prompts
 #

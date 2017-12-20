@@ -1,4 +1,6 @@
 # ~/.bashrc.d/bash_aliases.fedora
 #
 alias update='sudo dnf update -y --refresh'
+alias search='dnf search'
+alias pyhttp='python -m SimpleHTTPServer 8000'
 alias sxc='sxconsole $@ -R ~/Downloads -ME'

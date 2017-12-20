@@ -46,7 +46,8 @@ set wildignore+=*.swp
 "colorscheme wombat256mod
 "colorscheme pablo
 "colorscheme xoria256
-colorscheme desert256
+"colorscheme desert256
+colorscheme monokai
 
 " Use spaces instead of tabs
 set tabstop=4
@@ -62,6 +63,9 @@ set smarttab
 " Don't add empty newlines at the end of files
 set binary
 set noeol
+
+" Toggle auto-indenting for code paste
+set paste
 
 " UNIX format for end of lines
 set fileformat=unix                    " file mode is unix
@@ -133,9 +137,6 @@ nnoremap ; :
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
-
-" Join 6 lines
-map <silent>1 :j6<cr><down>
 
 " Toggle booleans
 nmap <silent><leader>h :set hlsearch!<cr>

@@ -43,4 +43,9 @@ if [ -d "${HOME}/usr/info" ]; then
    INFOPATH="${HOME}/usr/info:${INFOPATH}"
 fi
 
+# Set PATH to include android-studio binary
+if [ -d "${HOME}/android-studio/bin" ] ; then
+   PATH="${HOME}/android-studio/bin:${PATH}"
+fi
+
 tput init

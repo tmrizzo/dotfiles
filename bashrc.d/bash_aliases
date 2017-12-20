@@ -27,12 +27,12 @@ alias fgrep='fgrep --color=auto'                  # show differences in colour
 alias ls='ls -hF --color=tty --group-directories-first' # classify files in colour show directories on top
 # alias dir='ls --color=auto --format=vertical'
 # alias vdir='ls --color=auto --format=long'
-# alias ll='ls -l'                              # long list
-# alias la='ls -A'                              # all but . and ..
-# alias l='ls -CF'                              #
+alias ll='ls -l'                              # long list
+alias la='ls -A'                              # all but . and ..
+alias l='ls -CF'                              #
+
 alias sumfile="awk 'BEGIN{s=0}{s=s+\$0}END{print s}'" # give the sum of values from a file
 alias getmp3='youtube-dl --audio-format mp3 $@'
-alias getogg='youtube-dl --audio-format vorbis $@'
 
 case "$OSTYPE" in
     linux*)
@@ -46,14 +46,11 @@ case "$OSTYPE" in
 esac
 
 case "${OSCODENAME,,}" in
-    twentytwo|twentythree|twentyfour)
+    twentyfive|twentysix|twentyseven)
 		source ~/.bashrc.d/bash_aliases.fedora
 	;;
     utopic|karmic|lucid)
 		source ~/.bashrc.d/bash_aliases.ubuntu
-	;;
-    cygwin)
-		source ~/.bashrc.d/bash_aliases.cygwin
 	;;
     *)
 	;;

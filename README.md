@@ -1,4 +1,4 @@
-###My dotfiles collection
+###dotfiles collection
 
 This is my dotfiles collection, a set of configuration files I use to customize tools used in a daily basis.
 
@@ -22,6 +22,4 @@ ln -sf ~/git/dotfiles/zim ~/.config/zim
 
 ###Credits
 
-####screenrc
-
-My screenrc is heavily based on the one made by [Sven Guckes](http://www.guckes.net/Setup/screenrc)
+These dotfiles are heavily based on Antonio Dias work at https://github.com/accdias
