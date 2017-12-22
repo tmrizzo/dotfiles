@@ -71,9 +71,11 @@ settitle ()
 # }
 #
 # alias cd=cd_func
+
 now() {
 	echo $(date "+%Y-%m-%d %H:%M:%S") - "$@" >> $HOME/.now
 }
+
 16colors() {
     #Background
     for bg in {40..47} {100..107} 49; do
