@@ -14,7 +14,13 @@ ln -v -sf ~/git/dotfiles/bashrc.d ~/.bashrc.d
 ln -v -sf ~/git/dotfiles/gitconfig ~/.gitconfig
 ln -v -sf ~/git/dotfiles/vimrc ~/.vimrc
 ln -v -sf ~/git/dotfiles/vim ~/.vim
-ln -v -sf ~/git/dotfiles/tmux.conf ~/.tmux.conf
+ln -v -sf ~/git/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -v -sf ~/git/dotfiles/Xresources/base16-monokai-256.Xresources ~/.Xresources
+```
+### Test Xresources
+
+```
+xrdb -load ~/.Xresources
 ```
 
 ### Credits

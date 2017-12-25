@@ -48,6 +48,7 @@ set wildignore+=*.swp
 "colorscheme xoria256
 "colorscheme desert256
 colorscheme monokai
+"colorscheme solarized
 
 " Use spaces instead of tabs
 set tabstop=4

@@ -1,3 +1,4 @@
+# vim:ft=sh
 # To the extent possible under law, the author(s) have dedicated all
 # copyright and related and neighboring rights to this software to the
 # public domain worldwide. This software is distributed without any warranty.
@@ -81,6 +82,7 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
 
 # Set terminal to 256 colors mode
 #export TERM=xterm
+#export TERM=xterm-16color
 export TERM=xterm-256color
 
 # Aliases
