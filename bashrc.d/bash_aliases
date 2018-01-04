@@ -55,7 +55,7 @@ alias rg_orasysctl="egrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|
 alias sumfile="awk 'BEGIN{s=0}{s=s+\$0}END{print s}'"
 # Matches lines starting with sd and dm- and sort 10th columnt for
 # number number greater than 10
-alias rg_iosvctm="awk '/^(sd|dm-)/ { if ( $10 > 10 ) print $0 }'"
+alias rg_iosvctm="awk '/^(sd|dm-)/ { if ( \$10 > 10 ) print \$0 }'"
 
 # Misc
 alias whence='type -a'                            # where, of a sort

@@ -1,5 +1,5 @@
 [user]
-	name = Tiago M. De Rizzo
+	name = tmrizzo
 	email = tiagomdrizzo@gmail.com
 [core]
 	autocrlf = input
@@ -9,3 +9,5 @@
 	ui = true
 [push]
 	default = matching
+[credential]
+	helper = cache
