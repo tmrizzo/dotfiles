@@ -44,8 +44,10 @@ alias cgrep='egrep -v "^\s*(#|;|$)" --color=auto'
 alias egrep='egrep --color=auto'
 # Show differences in colour
 alias fgrep='fgrep --color=auto'
-# Delete all lines beginning only with a # from a file
+# Delete all lines beginning only with a # from a file and also empty lines
 alias rg_comments="egrep -v '^\s+?#|^$'"
+# Show some oracle database kernel tuning
+alias rg_orasysctl="egrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|writeback)_centisecs))'"
 
 # Regular Expressions: awk
 #
