@@ -7,10 +7,19 @@
 # application.  To override the alias instruction use a \ before, ie
 # \rm will call the real rm not the alias.
 #
+# File: misc
+#
+# Update source file
+alias src='source ~/.bashrc'
+# Go Home
+alias ~="cd ~"
+# Clear terminal display
+alias c='clear'
+
 # Interactive operation...
-# alias rm='rm -i'
-# alias cp='cp -i'
-# alias mv='mv -i'
+alias rm='rm -vi'
+alias cp='cp -vi'
+alias mv='mv -vi'
 #
 # Default to human readable figures
 alias df='df -hTP'
@@ -30,9 +39,20 @@ alias l='ls -CF'
 
 # Directory: change
 #
-alias ..='cd ..'
-alias ....='cd ../..'
-alias ......='cd ../../..'
+# Go back 1 directory level (for fast typers)
+alias cd..='cd ../'
+# Go back 1 directory level
+alias ..='cd ../'
+# Go back 2 directory levels
+alias ...='cd ../../'
+# Go back 3 directory levels
+alias .3='cd ../../../'
+# Go back 4 directory levels
+alias .4='cd ../../../../'
+# Go back 5 directory levels
+alias .5='cd ../../../../../'
+# Go back 6 directory levels
+alias .6='cd ../../../../../../'
 
 # Regular Expressions: grep
 #
