@@ -68,6 +68,8 @@ alias fgrep='fgrep --color=auto'
 alias rg_comments="egrep -v '^\s+?#|^$'"
 # Show some oracle database kernel tuning
 alias rg_orasysctl="egrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|writeback)_centisecs))'"
+# Show 3rd party kernel modules
+alias rg_3rdkmodinfo="egrep '(extra|weak)'"
 
 # Regular Expressions: awk
 #
