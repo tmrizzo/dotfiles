@@ -1,0 +1,41 @@
+[global_config]
+  always_split_with_profile = True
+  borderless = True
+  extra_styling = False
+  focus = mouse
+  title_hide_sizetext = True
+  title_inactive_bg_color = "#000000"
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.8
+    background_type = transparent
+    copy_on_selection = True
+    cursor_color = "#aaaaaa"
+    font = Inconsolata 15
+    foreground_color = "#ffffff"
+    palette = "#000000:#cc0000:#3f9c35:#ec7a08:#00b9e4:#3b00ff:#0088ce:#d3d7cf:#4c4c4c:#a30000:#92d400:#f0ab00:#0088ce:#ad7fa8:#00b9e4:#eeeeec"
+    scrollback_infinite = True
+    show_titlebar = False
+    use_system_font = False
+  [[tmrizzo_orig]]
+    background_darkness = 0.8
+    background_type = transparent
+    copy_on_selection = True
+    cursor_color = "#aaaaaa"
+    font = Inconsolata 15
+    foreground_color = "#ffffff"
+    palette = "#000000:#cc0000:#3f9c35:#ec7a08:#00b9e4:#3b00ff:#0088ce:#d3d7cf:#4c4c4c:#a30000:#92d400:#f0ab00:#0088ce:#ad7fa8:#00b9e4:#eeeeec"
+    scrollback_infinite = True
+    show_titlebar = False
+    use_system_font = False
