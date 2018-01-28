@@ -1,5 +1,6 @@
 # ~/.bashrc.d/bash_aliases.fedora
 #
+alias dnfi='sudo dnf install'
 alias dnfu='sudo dnf upgrade -y --refresh'
 alias dnfs='dnf search'
 alias dnfr='sudo dnf remove'

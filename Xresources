@@ -53,3 +53,12 @@
 *color19:      base02
 *color20:      base04
 *color21:      base06
+
+! Better font rendering
+!Xft.autohint: 0
+!Xft.antialias: 1
+!Xft.hinting: true
+!Xft.hintstyle: hintslight
+!Xft.dpi: 96
+!Xft.rgba: rgb
+!Xft.lcdfilter: lcddefault
