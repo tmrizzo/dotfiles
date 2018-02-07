@@ -57,24 +57,43 @@ alias .6='cd ../../../../../../'
 # Regular Expressions: grep
 #
 # Show differences in colour
-alias grep='grep --color'
+#alias grep='grep --color'
 # Strip comments from files
-alias cgrep='egrep -v "^\s*(#|;|$)" --color=auto'
+#alias cgrep='egrep -v "^\s*(#|;|$)" --color=auto'
 # Show differences in colour
-alias egrep='egrep --color=auto'
+#alias egrep='egrep --color=auto'
 # Show differences in colour
-alias fgrep='fgrep --color=auto'
+#alias fgrep='fgrep --color=auto'
 # Delete all lines beginning only with a # from a file and also empty lines
-alias rg_comments="egrep -v '^\s+?#|^$'"
+#alias rg_comments="egrep -v '^\s+?#|^$'"
 # Show some oracle database kernel tuning
-alias rg_orasysctl="egrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|writeback)_centisecs))'"
+#alias rg_orasysctl="egrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|writeback)_centisecs))'"
 # Show 3rd party kernel modules
-alias rg_3rdkmodinfo="egrep '(extra|weak)'"
+#alias rg_3rdkmodinfo="egrep '(extra|weak)'"
+
+# Regular Expressions: pcregrep
+# Install: dnf install pcre-tools
+# Site: http://www.rexegg.com/regex-quickstart.html#ref
+alias grep='pcregrep --color'
+# Strip comments from files
+alias cgrep='pcregrep -v "^\s*(#|;|$)" --color=auto'
+# Show differences in colour
+alias egrep='pcregrep --color=auto'
+# Show differences in colour
+alias fgrep='pcregrep --color=auto'
+# Delete all lines beginning only with a # from a file and also empty lines
+alias rg_comments="pcregrep -v '^\s+?#|^$'"
+# Show some oracle database kernel tuning
+alias rg_orasysctl="pcregrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|writeback)_centisecs))'"
+# Show 3rd party kernel modules
+alias rg_3rdkmodinfo="pcregrep '(extra|weak)'"
 
 # Regular Expressions: awk
 #
 # Delete all lines beginning with a # from a file
 alias sumfile="awk 'BEGIN{s=0}{s=s+\$0}END{print s}'"
+# Sum numerical matches from other outputs
+alias rg_sumatch="awk '{SUM+=\$1}END{print SUM}'"
 # Matches lines starting with sd and dm- and sort 10th columnt for
 # number number greater than 10
 alias rg_iosvctm="awk '/^(sd|dm-)/ { if ( \$10 > 10 ) print \$0 }'"
