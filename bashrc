@@ -99,6 +99,12 @@ export HISTSIZE=1000000
 #export TERM=xterm-16color
 export TERM=xterm-256color
 
+# Disable QT scale factor
+# For per application configuration add env QT_AUTO_SCREEN_SCALE_FACTOR=0
+# to the Exec line inside the app_name.desktop file in the directory:
+# .local/share/applications or /usr/share/applications/
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+
 # Aliases
 #
 # Some people use a different file for aliases
