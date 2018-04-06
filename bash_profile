@@ -18,13 +18,10 @@
 
 # The copy in your home directory (~/.bash_profile) is yours, please
 # feel free to customise it to create a shell
-# environment to your liking.  If you feel a change
-# would be benifitial to all, please feel free to send
-# a patch to the cygwin mailing list.
+# environment to your liking.
 
 # User dependent .bash_profile file
-
-# source the users bashrc if it exists
+# Source the users bashrc if it exists
 if [ -f "${HOME}/.bashrc" ] ; then
   source "${HOME}/.bashrc"
 fi

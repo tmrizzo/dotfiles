@@ -70,28 +70,29 @@ shopt -s checkwinsize
 #
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-#
+
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
 #export HISTIGNORE=$'[ \t]*:&:[fb]g:exit'
+
 # Ignore the ls command as well
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:history'
-#
+
 # Add the timestamp of each command in its history
 export HISTTIMEFORMAT="%F %T "
+
 # Whenever displaying the prompt, write the previous line to disk
 export PROMPT_COMMAND="history -a"
-#
+
 # Set the number of lines or commands that are stored in memory in a history list
 # while your bash session is ongoing
 export HISTFILESIZE=1000000
-#
+
 # Set the number of lines or commands allowed in the history file at session
 # startup, and stored in the history file at the end of your bash session
 # for use in future sessions
 export HISTSIZE=1000000
-
 
 # Set terminal to 256 colors mode
 #export TERM=xterm
@@ -120,3 +121,9 @@ export TERM=xterm-256color
 # /etc/profile sets 022, removing write perms to group + others.
 # Set a more restrictive umask: i.e. no exec perms for others:
 umask 027
+
+PATH="/home/tmrizzo/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/tmrizzo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/tmrizzo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/tmrizzo/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/tmrizzo/perl5"; export PERL_MM_OPT;
