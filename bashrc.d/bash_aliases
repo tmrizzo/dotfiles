@@ -82,7 +82,7 @@ alias egrep='pcregrep --color=auto'
 # Show differences in colour
 alias fgrep='pcregrep --color=auto'
 # Delete all lines beginning only with a # from a file and also empty lines
-alias rg_comments="pcregrep -v '^(\s+)?(#|;)|^$'"
+alias rg_comments="pcregrep -v '^(\s+)?(#|;)|^(\s+)?$'"
 # Show some oracle database kernel tuning
 alias rg_orasysctl="pcregrep 'vm.(swappiness|dirty_(background_ratio|ratio|(expire|writeback)_centisecs))'"
 # Show 3rd party kernel modules
@@ -96,7 +96,8 @@ alias sumfile="awk 'BEGIN{s=0}{s=s+\$0}END{print s}'"
 alias rg_sumatch="awk '{SUM+=\$1}END{print SUM}'"
 # Matches lines starting with sd and dm- and sort 10th columnt for
 # number number greater than 10
-alias rg_iosvctm="awk '/^(sd|dm-)/ { if ( \$10 > 10 ) print \$0 }'"
+alias rg_iosvctm="awk '/(dev|sd|dm-)/ { if ( \$10 > 10 ) print \$0 }'"
+alias rg_ioawait="awk '/(dev|sd|dm-)/ { if ( \$9 > 10 ) print \$0 }'"
 
 # Misc
 alias whence='type -a'                            # where, of a sort
@@ -105,7 +106,7 @@ alias getmp3='youtube-dl --audio-format mp3 $@'
 
 case "$OSTYPE" in
     linux*)
-		OSCODENAME=$(lsb_release -sc)
+		OSCODENAME=$(lsb_release -si)
 	;;
     cygwin)
 		OSCODENAME="cygwin"
@@ -114,11 +115,11 @@ case "$OSTYPE" in
         ;;
 esac
 
-case "${OSCODENAME,,}" in
-    twentyfive|twentysix|twentyseven)
+case "${OSCODENAME}" in
+    Fedora)
 		source ~/.bashrc.d/bash_aliases.fedora
 	;;
-    utopic|karmic|lucid)
+    Debian|Ubuntu)
 		source ~/.bashrc.d/bash_aliases.ubuntu
 	;;
     *)
