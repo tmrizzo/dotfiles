@@ -1,111 +1,54 @@
-!! vim:ft=xdefaults
-!! Xresources configuration file
-!! Load Xresources configuration:
-!! Command: xrdb -load ~/.Xresources
+! Base16 Tomorrow Night
+! Scheme: Chris Kempson (http://chriskempson.com)
 
-!! Better font rendering
-Xft.dpi: 96
-Xft.antialias: 1
-Xft.autohint: 0
-Xft.hinting: true
-Xft.hintstyle: hintfull
-Xft.rgba: rgb
-Xft.lcdfilter: lcddefault
+#define base00 #1d1f21
+#define base01 #282a2e
+#define base02 #373b41
+#define base03 #969896
+#define base04 #b4b7b4
+#define base05 #c5c8c6
+#define base06 #e0e0e0
+#define base07 #ffffff
+#define base08 #cc6666
+#define base09 #de935f
+#define base0A #f0c674
+#define base0B #b5bd68
+#define base0C #8abeb7
+#define base0D #81a2be
+#define base0E #b294bb
+#define base0F #a3685a
 
-!! xterm Molokai theme
-xterm*background: #101010
-xterm*foreground: #d0d0d0
-xterm*cursorColor: #d0d0d0
-xterm*color0: #101010
-xterm*color1: #960050
-xterm*color2: #66aa11
-xterm*color3: #c47f2c
-xterm*color4: #30309b
-xterm*color5: #7e40a5
-xterm*color6: #3579a8
-xterm*color7: #9999aa
-xterm*color8: #303030
-xterm*color9: #ff0090
-xterm*color10: #80ff00
-xterm*color11: #ffba68
-xterm*color12: #5f5fee
-xterm*color13: #bb88dd
-xterm*color14: #4eb4fa
-xterm*color15: #d0d0d0
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
 
-!! urxvt-unicode terminal
-urxvt.termName: rxvt-unicode
-!! Configuration
-urxvt.font: xft:Inconsolata:pixelsize=16
-urxvt.boldFont: xft:Inconsolata:pixelsize=16:weight=bold
-urxvt.letterSpace: -1
-urxvt.scrollBar: false
-urxvt.saveLines: 1000000
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
 
-!! Perl extensions
-urxvt.perl-ext-common: default,matcher
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
 
-!! keyboard-select
-urxvt.keysym.M-s: perl:keyboard-select:activate
-urxvt.keysym.M-r: perl:keyboard-select:search
-
-!! Open urls in browser with Control-Click
-!!urxvt.url-launcher: /usr/bin/firefox
-urxvt.url-launcher: /usr/bin/xdg-open
-urxvt.matcher.button: C1
-
-!! Do not scroll with output
-urxvt.scrollTtyOutput: false
-
-!! Scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-urxvt.scrollWithBuffer: true
-
-!! Scroll back to the bottom on keypress
-urxvt.scrollTtyKeypress: true
-
-!! Disable the scrollback buffer for the secondary screen (i.e less)
-urxvt.secondaryScreen: 1
-urxvt.secondaryScroll: 0
-
-!! Better wheel scrolling
-!!urxvt.secondaryWheel: 1
-
-!! Theme
-urxvt*.depth: 32
-urxvt*.background: [80]#000000
-urxvt*.foreground: #DCDCDC
-urxvt*.cursorColor: #DCDCDC
-urxvt*.color0: #101010
-urxvt*.color1: #960050
-urxvt*.color2: #92D400
-urxvt*.color3: #F2B22D
-urxvt*.color4: #68D6EE
-urxvt*.color5: #F5C255
-urxvt*.color6: #A30000
-urxvt*.color7: #9999aa
-urxvt*.color8: #303030
-urxvt*.color9: #CC0000
-urxvt*.color10: #92D400
-urxvt*.color11: #EC7A08
-urxvt*.color12: #0088CE
-urxvt*.color13: #0088CE
-urxvt*.color14: #4eb4fa
-urxvt*.color15: #EC7A08
-
-
-!urxvt.color0: #101010
-!urxvt.color1: #960050
-!urxvt.color2: #66aa11
-!urxvt.color3: #c47f2c
-!urxvt.color4: #30309b
-!urxvt.color5: #7e40a5
-!urxvt.color6: #3579a8
-!urxvt.color7: #9999aa
-!urxvt.color8: #303030
-!urxvt.color9: #ff0090
-!urxvt.color10: #80ff00
-!urxvt.color11: #ffba68
-!urxvt.color12: #5f5fee
-!urxvt.color13: #bb88dd
-!urxvt.color14: #4eb4fa
-!urxvt.color15: #d0d0d0
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06

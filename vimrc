@@ -47,7 +47,11 @@ set wildignore+=*.swp
 "colorscheme pablo
 "colorscheme xoria256
 "colorscheme desert256
-colorscheme monokai
+"colorscheme monokai
+colorscheme molokai
+"colorscheme monokai_pro
+"colorscheme base16-tomorrow
+"colorscheme base16-solarized-dark
 "colorscheme solarized
 
 " Use spaces instead of tabs
