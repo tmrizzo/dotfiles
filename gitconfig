@@ -5,6 +5,7 @@
 	autocrlf = input
 	editor = vim
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab
+	askPass = 
 [color]
 	ui = true
 [push]
