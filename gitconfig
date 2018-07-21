@@ -5,9 +5,15 @@
 	autocrlf = input
 	editor = vim
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab
-	askPass = 
+	askPass =
 [color]
 	ui = true
+[merge]
+    tool = vimdiff
+[diff]
+    tool = vimdiff
+[color "diff"]
+    whitespace = red reverse
 [push]
 	default = matching
 [credential]

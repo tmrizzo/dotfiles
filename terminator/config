@@ -34,7 +34,7 @@
     cursor_color = "#aaaaaa"
     font = Inconsolata 14
     foreground_color = "#ffffff"
-    palette = "#000000:#cc0000:#3f9c35:#ec7a08:#00b9e4:#3b00ff:#0088ce:#d3d7cf:#4c4c4c:#a30000:#92d400:#f0ab00:#0088ce:#ad7fa8:#204a87:#eeeeec"
+    palette = "#000000:#cc0000:#3f9c35:#ec7a08:#00b9e4:#3b00ff:#0088ce:#d3d7cf:#ffffff:#a30000:#92d400:#f0ab00:#0088ce:#ad7fa8:#204a87:#eeeeec"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
@@ -45,30 +45,30 @@
     copy_on_selection = True
     cursor_color = "#aaaaaa"
     font = Inconsolata 14
+    foreground_color = "#ffffff"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
   [[Molokai]]
-    background_color = "#121212"
     background_darkness = 0.9
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#bbbbbb"
     font = Inconsolata 14
+    foreground_color = "#ffffff"
     palette = "#121212:#fa2573:#98e123:#dfd460:#1080d0:#8700ff:#43a8d0:#bbbbbb:#555555:#f6669d:#b1e05f:#fff26d:#00afff:#af87ff:#51ceff:#ffffff"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
   [[MonokaiDark]]
-    background_color = "#1f1f1f"
     background_darkness = 0.9
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#f83e19"
     font = Inconsolata 14
-    foreground_color = "#b9bcba"
+    foreground_color = "#ffffff"
     palette = "#3a3d43:#be3f48:#879a3b:#c5a635:#4f76a1:#855c8d:#578fa4:#b9bcba:#888987:#fb001f:#0f722f:#c47033:#186de3:#fb0067:#2e706d:#fdffb9"
     scrollback_infinite = True
     scrollbar_position = hidden
@@ -92,6 +92,7 @@
     copy_on_selection = True
     cursor_color = "#aaaaaa"
     font = Inconsolata 14
+    foreground_color = "#ffffff"
     scrollback_infinite = True
     scrollbar_position = hidden
     show_titlebar = False
