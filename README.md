@@ -15,7 +15,9 @@ ln -v -sf ~/git/dotfiles/gitconfig ~/.gitconfig
 ln -v -sf ~/git/dotfiles/vimrc ~/.vimrc
 ln -v -sf ~/git/dotfiles/vim ~/.vim
 ln -v -sf ~/git/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -v -sf ~/git/dotfiles/fonts/ ~/.fonts
 ln -v -sf ~/git/dotfiles/Xresources/base16-monokai-256.Xresources ~/.Xresources
+ln -v -sf ~/git/dotfiles/terminator/ ~/.config/
 ```
 ### Test Xresources
 

@@ -105,6 +105,9 @@ export TERM=xterm-256color
 # .local/share/applications or /usr/share/applications/
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
+# Set Desktop Environment style
+export XDG_CURRENT_DESKTOP=KDE
+
 # Aliases
 #
 # Some people use a different file for aliases
