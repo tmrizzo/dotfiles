@@ -67,8 +67,7 @@ shopt -s checkwinsize
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
 # History Options
-#
-# Don't put duplicate lines in the history.
+# Don't add duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
 # Ignore some controlling instructions
@@ -143,8 +142,10 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=0
 # Set a more restrictive umask: i.e. no exec perms for others:
 umask 027
 
-PATH="/home/tmrizzo/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/tmrizzo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/tmrizzo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/tmrizzo/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/tmrizzo/perl5"; export PERL_MM_OPT;
+# Vagrant
+# Global Vagrant variables
+# Configures the default provider Vagrant will use.
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+
+# Configures providers that Vagrant should prefer
+export VAGRANT_PREFERRED_PROVIDERS=libvirt
