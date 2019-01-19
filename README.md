@@ -11,13 +11,15 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 # mkdir ~/git
 # git clone https://github.com/tiagomdrizzo/dotfiles
 # cd ~/git/dotfiles
-# stow *
+# stow -t ~ *
 ```
+
+- The `stow -t DIR` sets the target directory to `DIR` instead of the parent of the stow directory, i.e `~` is the home directory.
 
 - You also have the option to install only the dotfile you want, like so:
 ```
 # cd ~/git/dotfiles
-# stow vim
+# stow -t ~ vim
 ```
 
 - Don't want to use Stow? Symlink it manually.
