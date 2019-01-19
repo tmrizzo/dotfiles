@@ -31,7 +31,7 @@ alias du='du -xk'
 # Directory: list
 #
 # Classify files in colour show directories on top
-alias ls='ls -trhF --color=tty --group-directories-first'
+alias ls='ls -atrhF --color=tty --group-directories-first'
 # alias dir='ls --color=auto --format=vertical'
 # alias vdir='ls --color=auto --format=long'
 # Long list
