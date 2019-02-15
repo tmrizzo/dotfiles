@@ -138,7 +138,7 @@ client.focused_inactive $bd-inactive-color  $bg-inactive-color $text-inactive-co
 client.urgent           $bd-urgent-color    $bg-urgent-color   $text-color          $base0F
 
 # Set i3 base directory
-#set $i3_path ~/.config/i3
+set $i3_path ~/.config/i3
 
 # Set wallpaper directory
 set $wallpaper_dir ~/Pictures/wallpaper
