@@ -5,6 +5,13 @@ trackitem ()
 {
 	curl "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=$@" | sed -e 's/<.*>//g'
 }
+
+# Create a directory and "cd" to it
+mkd () {
+  mkdir -p $1
+  cd $1
+}
+
 #
 # a) function settitle
 settitle ()
