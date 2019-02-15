@@ -52,15 +52,3 @@ rofi-1.5.1-1.fc28.x86_64
 # dnf install i3 i3lock i3-ipc i3status py3status feh compton rofi tlp light pcre-tools network-manager-applet terminator \
   light vlc ImageMagick dunst numlockx polybar
 ~~~
-
-- Install:
-~~~
-# ln -v -sf ~/git/i3wm/ ~/.config/i3
-# ln -v -sf ~/git/i3wm/xinitrc ~/.xinitrc
-# ln -v -sf ~/git/i3wm/plasma-workspace ~/.config/plasma-workspace
-~~~
-
-
-### Credits
-
-Most dotfiles were heavily based on [Antonio Dias](https://github.com/accdias) work.
