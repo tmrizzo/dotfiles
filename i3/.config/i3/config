@@ -159,7 +159,7 @@ set $scripts ~/.scripts
 #set $polybar_dir ~/.config/i3/polybar
 
 # Set screen layout
-set $screenlayout ~/.config/i3/screenlayout
+set $screenlayout ~/.scripts/screenlayout
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-scale $wallpaper_dir/wallhaven-64352.jpg
