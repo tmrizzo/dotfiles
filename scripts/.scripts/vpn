@@ -1,0 +1,13 @@
+#!/bin/bash
+
+VPN_INFO=$(ip tuntap list | awk '/^tun/ { print $1 }')
+
+if [[ "$VPN_INFO" ]]; then
+   echo "on"
+   echo "on"
+   echo ""
+else
+   echo "off"
+   echo "off"
+   echo ""
+fi

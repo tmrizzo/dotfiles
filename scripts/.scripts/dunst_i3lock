@@ -1,0 +1,9 @@
+#!/bin/bash
+# Suspend message display
+killall -SIGUSR1 dunst
+
+# Lock the screen
+i3lock --nofork -I 15 -e -f --color '#000000'
+
+# Resume message display
+killall -SIGUSR2 dunst
