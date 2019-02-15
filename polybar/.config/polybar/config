@@ -79,7 +79,7 @@ scroll-down = i3wm-wsprev
 cursor-click = pointer
 cursor-scroll = default
 
-modules-left = title cmus
+modules-left = title
 modules-center = i3
 modules-right = wlan alsa battery-combined-shell date
 
@@ -193,7 +193,7 @@ format-foreground = ${colors.timedate-fg}
 
 [module/battery-combined-shell]
 type = custom/script
-exec = ~/scripts/polybar-scripts/battery-combined-shell/battery-combined-shell.sh
+exec = ~/.scripts/polybar-scripts/battery-combined-shell/battery-combined-shell.sh
 interval = 10
 
 format-charging = CHR: <label-charging>
