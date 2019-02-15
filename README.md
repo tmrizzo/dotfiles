@@ -31,7 +31,7 @@ The whole i3wm config file has comments, commands, examples, and so on to help n
 Note: This configuration has some i3wm + KDE preparations.
 
 - Tested with:
-~~~
+```
 i3status-2.12-1.fc28.x86_64
 i3-ipc-0.1.4-12.fc28.noarch
 i3lock-2.9.1-2.fc28.x86_64
@@ -39,16 +39,21 @@ i3-4.15-1.fc28.x86_64
 py3status-3.12-1.fc28.noarch
 dunst-1.2.0-2.fc28.x86_64
 rofi-1.5.1-1.fc28.x86_64
-~~~
+```
 
 - Copr Repositories:
-~~~
+```
 # dnf copr enable -y yaroslav/i3desktop
 # dnf copr enable -y vladius/polybar
-~~~
+```
 
 - Base Packages:
-~~~
+```
 # dnf install i3 i3lock i3-ipc i3status py3status feh compton rofi tlp light pcre-tools network-manager-applet terminator \
   light vlc ImageMagick dunst numlockx polybar
-~~~
+```
+
+- Stow it:
+```
+# stow -t ~ dunst compton polybar Xresources scripts rofi
+```
