@@ -150,7 +150,7 @@ set $screenshot_dir ~/Pictures/screenshot
 set $scripts ~/.scripts
 
 # Set rofi directory
-#set $rofi_dir ~/.config/i3/rofi
+#set $rofi_dir ~/.config/rofi
 
 # Set compton directory
 #set $compton_dir ~/.config/i3/compton
