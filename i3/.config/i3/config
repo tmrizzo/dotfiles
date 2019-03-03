@@ -572,7 +572,7 @@ set $tn_app3 "atom"
 #set $tn_app7 ""
 #set $tn_app8 ""
 #set $tn_app9 ""
-set $tn_app0 "dolphin"
+set $tn_app0 "nautilus"
 
 # Application variables for alternate typewriter numeric keys
 # alternate is right alt (AltGr)

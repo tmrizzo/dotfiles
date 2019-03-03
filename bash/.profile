@@ -20,8 +20,8 @@ export LESS_TERMCAP_us=$'\e[04;38;5;146m' # begin underline
 
 # It should have been set by the login manager, according to the value of the DesktopNames found in the session file.
 # the entry in the session file has multiple values separated in the usual way: with a semicolon.
-#export CURRENT_SESSION=KDE
-export XDG_CURRENT_DESKTOP=KDE
+#export XDG_CURRENT_DESKTOP=KDE
+export XDG_CURRENT_DESKTOP=GNOME
 
 # Qt5
 # Unlike Qt4, Qt5 doesn't ship a qtconfig utility to configure fonts, icons or styles. Instead, it will try to use
