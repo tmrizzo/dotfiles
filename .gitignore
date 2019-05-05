@@ -3,4 +3,6 @@
 /vim/.vim/undo/*
 /vim/.vim/.netrwhist
 /vim/.netrwhist
+/gtk/.config/gtk-4.0/servers
+/gtk/.config/gtk-4.0/bookmarks
 weechat/*
