@@ -1,7 +1,9 @@
 # vim:ft=i3config
-# i3 config file (v4)
+# sway config file (v1.0.1)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
 #
 # NOTE:
 # This configuration was created with KDE (Plasma 5) in mind.
@@ -9,21 +11,13 @@
 #
 # PRE-REQUISITES:
 # Repositories:
-# dnf copr enable yaroslav/i3desktop
+# dnf copr enable gumieri/sway
 #
 # Packages:
-# dnf install i3 i3lock i3-ipc i3status py3status feh compton rofi tlp light \
-# pcre-tools network-manager-applet terminator light vlc ImageMagick dunst
+# mako sway swaylock waybar playerctl jq langpacks-pt_BR libsigc++ \
+# pavucontrol python2-devel sway-debugsource xdotool feh compton rofi tlp light \
+# pcre-tools network-manager-applet terminator light vlc ImageMagick dunst \
 # numlockx
-#
-# Tested with:
-# i3status-2.12-1.fc28.x86_64
-# i3-ipc-0.1.4-12.fc28.noarch
-# i3lock-2.9.1-2.fc28.x86_64
-# i3-4.15-1.fc28.x86_64
-# py3status-3.12-1.fc28.noarch
-# dunst-1.2.0-2.fc28.x86_64
-# rofi-1.5.1-1.fc28.x86_64
 #
 # Fonts: Roboto, Ubuntu, Inconsolata, Overpass, FontAwesome
 #
@@ -78,9 +72,10 @@
 # it must be used for commands like import and xdotool, which are unable
 # to run upon KeyPress event.
 
+### Variables
 # Set modifier keys
 # Command: xmodmap
-# Set mod key to Super
+# Set mod key to Super (Logo key)
 set $sup Mod4
 
 # Set alternate mod key
@@ -137,8 +132,8 @@ client.unfocused        $bd-inactive-color  $bg-inactive-color $text-inactive-co
 client.focused_inactive $bd-inactive-color  $bg-inactive-color $text-inactive-color $base01   $base01
 client.urgent           $bd-urgent-color    $bg-urgent-color   $text-color          $base01   $base01
 
-# Set i3 base directory
-set $i3_path ~/.config/i3
+# Set terminal emulator
+set $term terminator
 
 # Set wallpaper directory
 set $wallpaper_dir ~/Pictures/wallpaper
@@ -148,219 +143,6 @@ set $screenshot_dir ~/Pictures/screenshot
 
 # Set custom scripts path
 set $scripts ~/.scripts
-
-# Set rofi directory
-#set $rofi_dir ~/.config/rofi
-
-# Set compton directory
-#set $compton_dir ~/.config/i3/compton
-
-# Set polybar directory
-#set $polybar_dir ~/.config/i3/polybar
-
-# Set screen layout
-set $screenlayout ~/.scripts/screenlayout
-
-# Wallpaper
-exec_always --no-startup-id feh --bg-scale $wallpaper_dir/wallhaven-64352.jpg
-
-# Composite window
-#exec --no-startup-id compton -b --config $compton_dir/compton.conf
-exec --no-startup-id compton -b
-
-# Dunst notification daemon
-#exec --no-startup-id dunst -config $i3_path/dunst/dunstrc
-exec --no-startup-id dunst
-
-# Polybar start
-#exec_always --no-startup-id $polybar_dir/launch.sh
-
-# Disable X screen saver feature
-exec_always --no-startup-id xset s off
-
-# Disable X power saving feature (disable dpms)
-# Command: xset q
-exec_always --no-startup-id xset -dpms
-
-# Enable X power saving (enable dpms)
-# Command: xset q
-# Enable dpms and set Standy to X seconds to dim the screen
-#exec_always --no-startup-id xset +dpms && xset dpms 300 0 0
-
-# Lockscreen timeout (-time minutes)
-#exec_always --no-startup-id xautolock -time 5 -locker "$scripts/i3exit lock"
-
-# Numlock key behavior
-exec_always --no-startup-id numlockx on
-
-# NetworkManager applet
-exec_always --no-startup-id nm-applet
-
-# Screen configuration
-# Command: xrandr --current
-# Command: xrandr --query
-set $screen1 "eDP-1"
-set $screen2 "DP-2-1"
-set $screen3 "DP-2-2"
-set $screen4 "DP-2-3"
-
-# Set primary screen
-exec --no-startup-id xrandr --output $screen1 --primary --rotate normal
-
-# External screen script layout
-# Command: ARandR
-set $mode_display_home 'Display_Home - [1] Main | [2] Right | [3] RightLeft | [4] Left'
-bindsym $sup+Mod1+z mode "$mode_display_home"
-mode "$mode_display_home" {
-      bindsym 1 exec $screenlayout/screenlayout.sh hlap, mode "default"
-      bindsym 2 exec $screenlayout/screenlayout.sh hdr, mode "default"
-      bindsym 3 exec $screenlayout/screenlayout.sh hdl, mode "default"
-      bindsym 4 exec $screenlayout/screenlayout.sh htp, mode "default"
-
-      # Back to normal: Enter or Escape
-      bindsym Return mode "default"
-      bindsym Escape mode "default"
-}
-
-set $mode_display_work 'Display_Work - [1] Main | [2] Right | [3] RightLeft'
-bindsym $sup+Mod1+x mode "$mode_display_work"
-mode "$mode_display_work" {
-      bindsym 1 exec $screenlayout/screenlayout.sh wlap, mode "default"
-      bindsym 2 exec $screenlayout/screenlayout.sh wdr, mode "default"
-      bindsym 3 exec $screenlayout/screenlayout.sh wtp, mode "default"
-
-      # Back to normal: Enter or Escape
-      bindsym Return mode "default"
-      bindsym Escape mode "default"
-}
-
-set $mode_display_wfh 'Display_WFH - [1] Main | [2] Right | [3] RightLeft'
-bindsym $sup+Mod1+c mode "$mode_display_wfh"
-mode "$mode_display_wfh" {
-      bindsym 1 exec $screenlayout/screenlayout.sh rlap, mode "default"
-      bindsym 2 exec $screenlayout/screenlayout.sh rdr, mode "default"
-      bindsym 3 exec $screenlayout/screenlayout.sh rtp, mode "default"
-
-      # Back to normal: Enter or Escape
-      bindsym Return mode "default"
-      bindsym Escape mode "default"
-}
-
-# Set TouchPad device
-# Commands: xinput list and xinput list-props $touchpad
-set $touchpad "SynPS/2 Synaptics TouchPad"
-
-# Set audio out devices
-# Command: pactl list sinks
-#set $audio_out1 alsa_output.pci-0000_00_1b.0.analog-stereo
-#set $audio_out1 alsa_output.pci-0000_00_1f.3.analog-stereo
-
-# Set audio in devices
-# Command: pactl list sources
-#set $audio_inp1 alsa_input.pci-0000_00_1b.0.analog-stereo
-#set $audio_inp1 alsa_input.pci-0000_00_1f.3.analog-stereo
-
-# Enable click touch on touchpads
-# Commands: xinput list and xinput list-props "SynPS/2 Synaptics TouchPad"
-exec --no-startup-id xinput set-prop $touchpad "libinput Tapping Enabled" 1
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-#font pango:Overpass 10
-#font pango:DejaVu Sans Mono 9
-#font pango:Ubuntu 9
-font pango:Roboto Regular 10
-
-# Use Mouse+$sup to drag floating windows to their wanted position
-floating_modifier $sup
-hide_edge_borders both
-new_window pixel 3
-
-# Start a terminal
-#bindsym $sup+Return exec i3-sensible-terminal
-#bindsym $sup+Return exec --no-startup-id terminator
-bindsym $sup+t exec --no-startup-id terminator
-
-# Kill focused window
-bindsym $sup+Escape kill
-
-# Start dmenu (a program launcher)
-# bindsym $sup+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-#bindsym $sup+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -l 7 -nb '#1E1E1E' -nf '#FFFFFF' -sf '#0088CE' -fn 'Ubuntu 11'"
-#bindsym $sup+d exec rofi -theme "$rofi_dir/tmrizzo_theme.rasi" -show combi -combi-modi "window,run,drun" -modi combi -lines 6 -opacity "30"
-#bindsym $sup+d exec rofi -theme "$rofi_dir/tmrizzo_theme.rasi" -show drun
-bindsym $sup+d exec rofi -theme tmrizzo_theme.rasi -show drun
-
-# Start rofi (alternative program launcher)
-#bindsym $sup+d exec rofi -show run
-
-# Window switcher
-#bindsym $sup+dead_grave exec rofi -theme "$rofi_dir/tmrizzo_theme.rasi" -show run
-#bindsym $sup+c exec rofi -theme "$rofi_dir/tmrizzo_theme.rasi" -show window
-#bindsym F12 exec rofi -theme "$rofi_dir/tmrizzo_theme.rasi" -show ssh
-
-bindsym $sup+dead_grave exec rofi -theme tmrizzo_theme.rasi -show run
-bindsym $sup+c exec rofi -theme tmrizzo_theme.rasi -show window
-bindsym F12 exec rofi -theme tmrizzo_theme.rasi -show ssh
-
-# Lock screen
-bindsym $sup+Ctrl+l exec $scripts/i3exit lock
-
-# Change focus
-bindsym $sup+j focus left
-bindsym $sup+k focus down
-bindsym $sup+i focus up
-bindsym $sup+l focus right
-
-# Changes focus (arrow keys)
-bindsym $sup+Left focus left
-bindsym $sup+Down focus down
-bindsym $sup+Up focus up
-bindsym $sup+Right focus right
-
-# Move focused window (arrow keys)
-bindsym $sup+Shift+j move left
-bindsym $sup+Shift+k move down
-bindsym $sup+Shift+i move up
-bindsym $sup+Shift+l move right
-
-# Move focused window (alternative)
-bindsym $sup+Shift+Left move left
-bindsym $sup+Shift+Down move down
-bindsym $sup+Shift+Up move up
-bindsym $sup+Shift+Right move right
-
-# Split in horizontal orientation
-bindsym $sup+h split h
-
-# Split in vertical orientation
-bindsym $sup+v split v
-
-# Sticky window
-bindsym $sup+Shift+s sticky toggle
-
-# Enter fullscreen mode for the focused container
-bindsym $sup+f fullscreen toggle
-
-# Change container layout (stacked, tabbed, toggle split)
-bindsym $sup+s layout stacking
-bindsym $sup+w layout tabbed
-bindsym $sup+e layout toggle split
-
-# Toggle tiling / floating
-bindsym $sup+Shift+space floating toggle
-
-# Change focus between tiling / floating windows
-bindsym $sup+space focus mode_toggle
-
-# Focus the parent container
-bindsym $sup+a focus parent
-
-# Focus the child container
-#bindsym $sup+d focus child
 
 # Set workspaces variables and specific icon sets
 set $ws1 "1:"
@@ -374,7 +156,178 @@ set $ws8 "8:"
 set $ws9 "9:"
 set $ws0 "10:"
 
-# Switch to workspace
+# Set Multimidia keys
+set $play XF86AudioPlay
+set $next XF86AudioNext
+set $prev XF86AudioPrev
+set $stop XF86AudioStop
+set $mute XF86AudioMute
+set $volup XF86AudioRaiseVolume
+set $voldw XF86AudioLowerVolume
+set $micmt XF86AudioMicMute
+
+### Startup
+# Wallpaper
+#exec_always --no-startup-id feh --bg-scale $wallpaper_dir/wallhaven-64352.jpg
+
+# Numlock key behavior
+exec_always --no-startup-id numlockx on
+
+# NetworkManager applet
+exec_always --no-startup-id nm-applet
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:Overpass 10
+#font pango:DejaVu Sans Mono 9
+#font pango:Ubuntu 9
+font pango:Roboto Regular 10
+
+# Your preferred application launcher
+# Note: it's recommended that you pass the final command to sway
+set $menu dmenu_path | dmenu | xargs swaymsg exec
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+#output * bg /usr/share/backgrounds/f30/default/normalish/f30.png fill
+output * bg $wallpaper_dir/wallhaven-64352.jpg fill
+
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+# Playback control
+# Command: playerctl
+bindsym $play exec playerctl play-pause
+bindsym $next exec playerctl next
+bindsym $prev exec playerctl previous
+bindsym $stop exec playerctl stop
+#bindsym $mute exec playerctl volume $sink 0
+
+# Volume Control for Pulse Audio (pactl list sinks)
+# Command: pactl list sinks
+# Command: amixer -D pulse
+# Raise sound volume
+bindsym $volup exec "amixer -q -D pulse sset Master 2%+ unmute"
+# Raise sound volume (alternative)
+bindsym $sup+F3 exec "amixer -q -D pulse sset Master 2%+ unmute"
+# Lower sound volume
+bindsym $voldw exec "amixer -q -D pulse sset Master 2%- unmute"
+# Lower sound volume (alternative)
+bindsym $sup+F2 exec "amixer -q -D pulse sset Master 2%- unmute"
+# Mute sound
+bindsym $mute exec "amixer -q -D pulse sset Master toggle"
+# Mute sound (alternative)
+bindsym $sup+F1 exec "amixer -q -D pulse sset Master toggle"
+
+# Microphone Control for Pulse Audio
+# Command: pactl list sources
+# Command: amixer -D pulse
+# Raise sound volume (alternative)
+bindsym $sup+Shift+F3 exec "amixer -q -D pulse sset Capture 2%+ unmute"
+# Lower sound volume (alternative)
+bindsym $sup+Shift+F2 exec "amixer -q -D pulse sset Capture 2%- unmute"
+# Mute microphone
+bindsym $micmt exec "amixer -q -D pulse sset Capture toggle"
+# Mute microphone (alternative)
+bindsym $sup+F4 exec "amixer -q -D pulse sset Capture toggle"
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' \
+#               resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+# start a terminal
+#bindsym $mod+Return exec $term
+bindsym $sup+t exec --no-startup-id $term
+
+# kill focused window
+#bindsym $mod+Shift+q kill
+bindsym $sup+Escape kill
+
+# start your launcher
+#bindsym $mod+d exec $menu
+
+# Rofi launcher
+bindsym $sup+d exec rofi -theme tmrizzo_theme.rasi -show drun
+bindsym $sup+dead_grave exec rofi -theme tmrizzo_theme.rasi -show run
+bindsym $sup+c exec rofi -theme tmrizzo_theme.rasi -show window
+bindsym F12 exec rofi -theme tmrizzo_theme.rasi -show ssh
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+#floating_modifier $mod normal
+
+# Use Mouse+$sup to drag floating windows to their wanted position
+floating_modifier $sup
+hide_edge_borders both
+new_window pixel 3
+
+# Reload the configuration file
+bindsym $sup+Shift+c reload
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $sup+Shift+r restart
+
+# exit sway (logs you out of your Wayland session)
+bindsym $sup+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+#
+# Moving around:
+#
+# Changes focus (arrow keys)
+bindsym $sup+Left focus left
+bindsym $sup+Down focus down
+bindsym $sup+Up focus up
+bindsym $sup+Right focus right
+
+# Move focused window (alternative)
+bindsym $sup+Shift+Left move left
+bindsym $sup+Shift+Down move down
+bindsym $sup+Shift+Up move up
+bindsym $sup+Shift+Right move right
+
+#
+# Workspaces:
+#
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+#
+# switch to workspace
 bindsym $sup+1 workspace $ws1
 bindsym $sup+2 workspace $ws2
 bindsym $sup+3 workspace $ws3
@@ -398,93 +351,66 @@ bindsym $sup+Shift+8 move container to workspace $ws8
 bindsym $sup+Shift+9 move container to workspace $ws9
 bindsym $sup+Shift+0 move container to workspace $ws0
 
-# Workspace default screens
-#workspace $ws1 output $screen1
-#workspace $ws2 output $screen1
-#workspace $ws3 output $screen1
-#workspace $ws4 output $screen1
-#workspace $ws5 output $screen1
-#workspace $ws6 output $screen1
-#workspace $ws9 output $screen1
-#workspace $ws0 output $screen1
-
-# Reload the configuration file
-bindsym $sup+Shift+c reload
-
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $sup+Shift+r restart
-
-# Exit i3 (logs you out of your X session)
-bindsym $sup+Shift+e exec "$scripts/exit_menu"
-
-# Volume Control for Pulse Audio (pactl list sinks)
-# Command: pactl list sinks
-# Command: amixer -D pulse
-# Raise sound volume
-bindsym XF86AudioRaiseVolume exec "amixer -q -D pulse sset Master 2%+ unmute"
-# Raise sound volume (alternative)
-bindsym $sup+F3 exec "amixer -q -D pulse sset Master 2%+ unmute"
-# Lower sound volume
-bindsym XF86AudioLowerVolume exec "amixer -q -D pulse sset Master 2%- unmute"
-# Lower sound volume (alternative)
-bindsym $sup+F2 exec "amixer -q -D pulse sset Master 2%- unmute"
-# Mute sound
-bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle"
-# Mute sound (alternative)
-bindsym $sup+F1 exec "amixer -q -D pulse sset Master toggle"
-
-# Microphone Control for Pulse Audio
-# Command: pactl list sources
-# Command: amixer -D pulse
-# Raise sound volume (alternative)
-bindsym $sup+Shift+F3 exec "amixer -q -D pulse sset Capture 2%+ unmute"
-# Lower sound volume (alternative)
-bindsym $sup+Shift+F2 exec "amixer -q -D pulse sset Capture 2%- unmute"
-# Mute microphone
-bindsym XF86AudioMicMute exec "amixer -q -D pulse sset Capture toggle"
-# Mute microphone (alternative)
-bindsym $sup+F4 exec "amixer -q -D pulse sset Capture toggle"
-
-# Screen brightness controls
 #
-# IMPORTANT NOTE:
-# If xbacklight is not properly working for intel driver, it may be
-# needed to create an xorg.conf file with the following content:
+# Layout stuff:
 #
-# Section "Device"
-#    Identifier "Card0"
-#    Driver     "intel"
-#    Option     "Backlight" "intel_backlight"
-# EndSection
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+#bindsym $mod+b splith
+#bindsym $mod+v splitv
+
+# Split in horizontal orientation
+bindsym $sup+h splith
+
+# Split in vertical orientation
+bindsym $sup+v splitv
+
+# Sticky window
+bindsym $sup+Shift+s sticky toggle
+
+# Switch container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+bindsym $sup+s layout stacking
+bindsym $sup+w layout tabbed
+bindsym $sup+e layout toggle split
+
+# Make the current focus fullscreen
+#bindsym $mod+f fullscreen
+bindsym $sup+f fullscreen toggle
+
+# Toggle the current focus between tiling and floating mode
+#bindsym $mod+Shift+space floating toggle
+bindsym $sup+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+#bindsym $mod+space focus mode_toggle
+bindsym $sup+space focus mode_toggle
+
+# move focus to the parent container
+#bindsym $mod+a focus parent
+bindsym $sup+a focus parent
+
 #
-# Or use "light" command
+# Scratchpad:
 #
-# Hint: xrandr command will output new screen names and you might
-# need to change the screen variable from eDP-1 to eDP1
-# Increase screen brightness
-bindsym XF86MonBrightnessUp exec "light -A 5"
-# Increase screen brightness (alternative)
-bindsym $sup+F6 exec "light -A 5"
-# Decrease screen brightness
-bindsym XF86MonBrightnessDown exec "light -U 5"
-# Decrease screen brightness (alternative)
-bindsym $sup+F5 exec "light -U 5"
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $sup+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $sup+minus scratchpad show
 
 # Resize window (you can also use the mouse for that)
 bindsym $sup+r mode "Resize"
 mode "Resize" {
       # These bindings trigger as soon as you enter the resize mode
-
-      # Pressing left will shrink the window’s width.
-      # Pressing right will grow the window’s width.
-      # Pressing up will shrink the window’s height.
-      # Pressing down will grow the window’s height.
-      bindsym j resize shrink width 5 px or 5 ppt
-      bindsym k resize grow height 5 px or 5 ppt
-      bindsym l resize shrink height 5 px or 5 ppt
-      bindsym semicolon resize grow width 5 px or 5 ppt
-
-      # Same bindings, but for the arrow keys
       bindsym Left resize shrink width 5 px or 5 ppt
       bindsym Down resize grow height 5 px or 5 ppt
       bindsym Up resize shrink height 5 px or 5 ppt
@@ -524,12 +450,12 @@ for_window [class="(?i)nautilus$"] floating enable
 # OR
 # sudo chmod -x /usr/bin/ksplashqml
 # Avoid tiling popups, dropdown windows from plasma
-# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everythiing)
+# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides ev
 exec --no-startup-id wmctrl -c Plasma
 for_window [title="Desktop - Plasma"] kill, floating enable, border none
 
 ## Avoid tiling popups, dropdown windows from plasma
-# for the first time, manually resize them, i3 will remember the setting for floating windows
+# for the first time, manually resize them, i3 will remember the setting for floating wi
 for_window [class="(?i)plasmashell"] floating enable
 for_window [class="(?i)Plasma"] floating enable, border none
 for_window [title="plasma-desktop"] floating enable, border none
@@ -544,7 +470,7 @@ for_window [class="(?i)yakuake"] floating enable
 # Focus configuration
 no_focus [class="(i?)plasmashell"]
 no_focus [window_role="(i?)pop-up"]
-no_focus [window_type="(i?)notification"]
+#no_focus [window_type="(i?)notification"]
 
 # Assign applications default workspaces
 #assign [class="(?i)google-chrome(-beta)?"] $ws1
@@ -654,7 +580,7 @@ set $mode_screenshot 'Screenshot - se[l]ect,f[u]ll'
 # The odiaeresis key is p
 bindsym $altgr+odiaeresis mode "$mode_screenshot"
 mode "$mode_screenshot" {
-      bindsym --release u exec --no-startup-id "import -window root $screenshot_dir/screenshot_full_$(date '+%Y%m%d_%H%M%S').png", mode "default"
+      bindsym --release u exec --no-startup-id "import -window root $screenshot_dir/screenshot_full_$(date '+%Y%m%d_%H%M%S').png", m
       bindsym --release l exec --no-startup-id "import $screenshot_dir/screenshot_slct_$(date '+%Y%m%d_%H%M%S').png", mode "default"
 
       # Back to normal: Enter or Escape
@@ -678,6 +604,24 @@ mode "$mode_system" {
       bindsym Escape mode "default"
 }
 
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+#bar {
+#    position top
+#
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+#
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
+
 # Start i3bar to display a workspace bar
 # Note: Comment bar{} if polybar is in use
 # i3bar configuration
@@ -689,14 +633,11 @@ bar {
       # Set font
       font pango:Roboto Medium 10
 
-      # py3status status bar
-      status_command py3status -c $i3_path/i3status.conf
-
       # Set output screen
-      output $screen1
+      #output $screen1
 
       # Set i3bar tray output screen
-      tray_output $screen1
+      #tray_output $screen1
 
       # Fitt's law
       tray_padding 0
@@ -733,51 +674,4 @@ bar {
    }
 }
 
-# Bar on Screen2
-bar {
-      # Bar ID
-      id 1
-
-      # Set font
-      font pango:Roboto Medium 10
-
-      # Set output screen
-      output $screen2
-      output $screen3
-      output $screen4
-
-      # Set i3bar tray output screen
-      tray_output none
-
-      # Bar position
-      position bottom
-
-      # Bar display mode
-      # Bar modes dock|hide|invisible
-      mode dock
-
-      #hidden_state hide
-      #modifier Mod1
-
-      # Custom separator
-      separator_symbol "|"
-
-      # Workspace buttons
-      workspace_buttons yes
-
-      # Mouse button behavior (nop disables clicking)
-      # Mouse Scroll wheel up
-      bindsym button4 nop
-      # Mouse Scroll wheel down
-      bindsym button5 nop
-
-   colors {
-      background $bar-bg-color
-      statusline $bar-statusline-color
-      separator  $bar-separator-color
-      #                  border                background            text
-      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
-      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
-      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
-   }
-}
+include /etc/sway/config.d/*

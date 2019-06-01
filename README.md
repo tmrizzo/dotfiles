@@ -57,3 +57,16 @@ rofi-1.5.1-1.fc28.x86_64
 ```
 # stow -t ~ dunst compton polybar Xresources scripts rofi
 ```
+
+# Sway configuration
+
+- Copr Repository:
+```
+# dnf copr enable gumieri/sway
+```
+
+- Base Packages:
+```
+# dnf install mako sway swaylock waybar playerctl jq langpacks-pt_BR libsigc++ pavucontrol python2-devel sway-debugsource xdotool \
+feh compton rofi tlp light pcre-tools network-manager-applet terminator light vlc ImageMagick dunst numlockx polybar
+```
