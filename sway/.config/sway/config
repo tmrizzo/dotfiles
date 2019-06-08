@@ -5,10 +5,6 @@
 #
 # Read `man 5 sway` for a complete reference.
 #
-# NOTE:
-# This configuration was created with KDE (Plasma 5) in mind.
-# Some settings may differ from other DEs.
-#
 # PRE-REQUISITES:
 # Repositories:
 # dnf copr enable gumieri/sway
@@ -20,12 +16,6 @@
 # numlockx
 #
 # Fonts: Roboto, Ubuntu, Inconsolata, Overpass, FontAwesome
-#
-# IMPORTANT NOTE:
-# Mapping keyboard keycodes and symbols
-# Commands: xev (-event keyboard), xinput and xmodmap
-#
-# The keyboard mapping and layout affect the keybindings.
 #
 # Keyboard layout configuration
 # Command: localectl --no-convert set-x11-keymap us thinkpad intl
@@ -126,11 +116,11 @@ set $ws-text-color          #FFFFFF
 set $ws-text-inactive-color #828282
 
 # Set window colors
-#                       border              background         text                 indicator child_border
-client.focused          $bd-color           $bg-color          $text-color          $base01   $base01
-client.unfocused        $bd-inactive-color  $bg-inactive-color $text-inactive-color $base01   $base01
-client.focused_inactive $bd-inactive-color  $bg-inactive-color $text-inactive-color $base01   $base01
-client.urgent           $bd-urgent-color    $bg-urgent-color   $text-color          $base01   $base01
+#                        border              background          text                  indicator  child_border
+client.focused           $bd-color           $bg-color           $text-color           $base01    $base01
+client.unfocused         $bd-inactive-color  $bg-inactive-color  $text-inactive-color  $base01    $base01
+client.focused_inactive  $bd-inactive-color  $bg-inactive-color  $text-inactive-color  $base01    $base01
+client.urgent            $bd-urgent-color    $bg-urgent-color    $text-color           $base01    $base01
 
 # Set terminal emulator
 set $term terminator
@@ -176,6 +166,8 @@ exec_always --no-startup-id numlockx on
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
 
+# Notification daemon
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:Overpass 10
@@ -185,7 +177,7 @@ font pango:Roboto Regular 10
 
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec
+#set $menu dmenu_path | dmenu | xargs swaymsg exec
 
 ### Output configuration
 #
@@ -199,6 +191,85 @@ output * bg $wallpaper_dir/wallhaven-64352.jpg fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+
+# Set screen configuration
+# Command: swaymsg -t get_outputs
+set $h_eDP1 'Unknown 0x233E 0x00000000'
+set $h_DP3 'Samsung Electric Company SAMSUNG 0x00000000'
+set $h_DP4 'Lenovo Group Limited LEN LT2252pwA V1DFX13'
+
+# Home setup
+# Position configuration
+# Hint: most left monitor is pos 0,0
+# h_eDP1 (center) - right of DP4
+output $h_eDP1 mode 1600x900  position 1680,0
+# h_DP3 (right) - right of h_eDP1 (1600+1680=3280)
+output $h_DP3  mode 1360x768  position 3280,0
+# h_DP4 (left) - most left screen
+output $h_DP4  mode 1680x1050 position 0,0
+
+### Idle configuration
+### Display Power Management Signaling (DPMS)
+#
+# Example:
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' \
+#               resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+
+# Lock screen after 600s (10 minutes)
+exec swayidle -w timeout 600 'swaylock -f -c 000000'
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+# Set keyboard configuration
+# Command: man xkeyboard-config, swaymsg -t get_inputs
+input * xkb_layout "us(intl)"
+input "6127:24610:Lenovo_Ultraslim_Plus_Wireless_Keyboard_&_Mouse_Consumer_Control" xkb_model "thinkpad"
+
+# Set touchpad configuration
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+# Set touchpad configuration
+input "1739:0:Synaptics_TM2722-001" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+# Screen brightness control
+# Command: light
+# Increase screen brightness
+bindsym XF86MonBrightnessUp exec "light -A 5"
+# Increase screen brightness (alternative)
+bindsym $sup+F6 exec "light -A 5"
+# Decrease screen brightness
+bindsym XF86MonBrightnessDown exec "light -U 5"
+# Decrease screen brightness (alternative)
+bindsym $sup+F5 exec "light -U 5"
 
 # Playback control
 # Command: playerctl
@@ -235,34 +306,6 @@ bindsym $sup+Shift+F2 exec "amixer -q -D pulse sset Capture 2%- unmute"
 bindsym $micmt exec "amixer -q -D pulse sset Capture toggle"
 # Mute microphone (alternative)
 bindsym $sup+F4 exec "amixer -q -D pulse sset Capture toggle"
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
 #
@@ -580,7 +623,7 @@ set $mode_screenshot 'Screenshot - se[l]ect,f[u]ll'
 # The odiaeresis key is p
 bindsym $altgr+odiaeresis mode "$mode_screenshot"
 mode "$mode_screenshot" {
-      bindsym --release u exec --no-startup-id "import -window root $screenshot_dir/screenshot_full_$(date '+%Y%m%d_%H%M%S').png", m
+      bindsym --release u exec --no-startup-id "import -window root $screenshot_dir/screenshot_full_$(date '+%Y%m%d_%H%M%S').png", mode "default"
       bindsym --release l exec --no-startup-id "import $screenshot_dir/screenshot_slct_$(date '+%Y%m%d_%H%M%S').png", mode "default"
 
       # Back to normal: Enter or Escape
@@ -588,16 +631,20 @@ mode "$mode_screenshot" {
       bindsym Escape mode "default"
 }
 
+# Lock screen
+set $lock 'swaylock -f -c 000000'
+bindsym $sup+Ctrl+l exec $lock
+
 # System status mode
 set $mode_system 'System [l]ock,l[o]gout,[s]uspend,[h]ibernate,[r]eboot,[p]oweroff'
 bindsym $altgr+BackSpace mode "$mode_system"
 mode "$mode_system" {
-      bindsym l exec --no-startup-id $scripts/i3exit lock, mode "default"
-      bindsym o exec --no-startup-id $scripts/i3exit logout, mode "default"
-      bindsym s exec --no-startup-id $scripts/i3exit suspend, mode "default"
-      bindsym h exec --no-startup-id $scripts/i3exit hibernate, mode "default"
-      bindsym r exec --no-startup-id $scripts/i3exit reboot, mode "default"
-      bindsym p exec --no-startup-id $scripts/i3exit poweroff, mode "default"
+      bindsym l exec --no-startup-id $lock, mode "default"
+      bindsym o exec --no-startup-id exit, mode "default"
+      bindsym s exec --no-startup-id $lock && systemctl suspend mode "default"
+      bindsym h exec --no-startup-id $lock && systemctl hibernate, mode "default"
+      bindsym r exec --no-startup-id systemctl reboot, mode "default"
+      bindsym p exec --no-startup-id systemctl poweroff, mode "default"
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
@@ -622,56 +669,55 @@ mode "$mode_system" {
 #    }
 #}
 
-# Start i3bar to display a workspace bar
-# Note: Comment bar{} if polybar is in use
-# i3bar configuration
-# Bar on Screen1
 bar {
-      # Bar ID
-      id 0
-
-      # Set font
-      font pango:Roboto Medium 10
-
-      # Set output screen
-      #output $screen1
-
-      # Set i3bar tray output screen
-      #tray_output $screen1
-
-      # Fitt's law
-      tray_padding 0
-
-      # Bar position
-      position bottom
-
-      # Bar display mode
-      # Keep the bar hidden and show it when Mod1 is pressed
-      #mode hide
-      #hidden_state hide
-      #modifier Mod1
-
-      # Custom separator
-      separator_symbol "|"
-
-      # Workspace buttons
-      workspace_buttons yes
-
-      # Mouse button behavior (nop disables clicking)
-      # Mouse Scroll wheel up
-      bindsym button4 nop
-      # Mouse Scroll wheel down
-      bindsym button5 nop
-
-   colors {
-      background $bar-bg-color
-      statusline $bar-statusline-color
-      separator  $bar-separator-color
-      #                  border                background            text
-      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
-      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
-      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
-   }
+    swaybar_command waybar
 }
 
-include /etc/sway/config.d/*
+# i3bar configuration
+# Bar on Screen1
+#bar {
+#      # Set font
+#      font pango:Roboto Medium 10
+#
+#      # Status bar
+#      #status_command waybar
+#
+#      # Set i3bar tray output screen
+#      #tray_output $screen0
+#
+#      # Fitt's law
+#      tray_padding 0
+#
+#      # Bar position
+#      position bottom
+#
+#      # Bar display mode
+#      # Keep the bar hidden and show it when Mod1 is pressed
+#      #mode hide
+#      #hidden_state hide
+#      #modifier Mod1
+#
+#      # Custom separator
+#      separator_symbol "|"
+#
+#      # Workspace buttons
+#      workspace_buttons yes
+#
+#      # Mouse button behavior (nop disables clicking)
+#      # Mouse Scroll wheel up
+#      bindsym button4 nop
+#      # Mouse Scroll wheel down
+#      bindsym button5 nop
+#
+#   colors {
+#      background $bar-bg-color
+#      statusline $bar-statusline-color
+#      separator  $bar-separator-color
+#      #                  border                background            text
+#      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
+#      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
+#      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
+#   }
+#}
+
+#include /etc/sway/config.d/*
