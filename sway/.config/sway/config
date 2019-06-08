@@ -5,6 +5,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 #
+# Sway Wiki https://github.com/swaywm/sway/wiki
+#
 # PRE-REQUISITES:
 # Repositories:
 # dnf copr enable gumieri/sway
@@ -12,8 +14,8 @@
 # Packages:
 # mako sway swaylock waybar playerctl jq langpacks-pt_BR libsigc++ \
 # pavucontrol python2-devel sway-debugsource xdotool feh compton rofi tlp light \
-# pcre-tools network-manager-applet terminator light vlc ImageMagick dunst \
-# numlockx
+# pcre-tools network-manager-applet terminator light vlc ImageMagick mako \
+# numlockx slurp grim
 #
 # Fonts: Roboto, Ubuntu, Inconsolata, Overpass, FontAwesome
 #
@@ -157,9 +159,6 @@ set $voldw XF86AudioLowerVolume
 set $micmt XF86AudioMicMute
 
 ### Startup
-# Wallpaper
-#exec_always --no-startup-id feh --bg-scale $wallpaper_dir/wallhaven-64352.jpg
-
 # Numlock key behavior
 exec_always --no-startup-id numlockx on
 
@@ -181,6 +180,7 @@ font pango:Roboto Regular 10
 
 ### Output configuration
 #
+# Wallpaper configuration
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/f30/default/normalish/f30.png fill
 output * bg $wallpaper_dir/wallhaven-64352.jpg fill
@@ -192,21 +192,39 @@ output * bg $wallpaper_dir/wallhaven-64352.jpg fill
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+# Home setup
 # Set screen configuration
 # Command: swaymsg -t get_outputs
-set $h_eDP1 'Unknown 0x233E 0x00000000'
-set $h_DP3 'Samsung Electric Company SAMSUNG 0x00000000'
-set $h_DP4 'Lenovo Group Limited LEN LT2252pwA V1DFX13'
+set $heDP1 'Unknown 0x233E 0x00000000'
+set $hDP3 'Samsung Electric Company SAMSUNG 0x00000000'
+set $hDP4 'Lenovo Group Limited LEN LT2252pwA V1DFX13'
 
-# Home setup
 # Position configuration
 # Hint: most left monitor is pos 0,0
 # h_eDP1 (center) - right of DP4
-output $h_eDP1 mode 1600x900  position 1680,0
+output $heDP1 mode 1600x900  position 1680,0
 # h_DP3 (right) - right of h_eDP1 (1600+1680=3280)
-output $h_DP3  mode 1360x768  position 3280,0
+output $hDP3  mode 1360x768  position 3280,0
 # h_DP4 (left) - most left screen
-output $h_DP4  mode 1680x1050 position 0,0
+output $hDP4  mode 1680x1050 position 0,0
+
+# Disable output
+#output $h_DP3 disable
+#output $h_DP4 disable
+
+# External screen script layout
+set $mode_display_home 'Home: [M]ain | [R]ight | Righ[t]Left | [L]eft'
+bindsym $sup+Mod1+z mode "$mode_display_home"
+mode "$mode_display_home" {
+      bindsym m output $hDP3 disable; output $hDP4 disable; mode "default"
+      bindsym r output $hDP3 enable; output $hDP4 disable; mode "default"
+      bindsym t output $hDP4 enable; output $hDP3 enable; mode "default"
+      bindsym l output $hDP4 enable; output $hDP3 disable; mode "default"
+
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
+}
 
 ### Idle configuration
 ### Display Power Management Signaling (DPMS)
@@ -334,6 +352,10 @@ bindsym F12 exec rofi -theme tmrizzo_theme.rasi -show ssh
 # Change normal to inverse to use left mouse button for resizing and right
 # mouse button for dragging.
 #floating_modifier $mod normal
+
+# Remove window border
+default_border none
+default_floating_border pixel 3
 
 # Use Mouse+$sup to drag floating windows to their wanted position
 floating_modifier $sup
@@ -532,7 +554,7 @@ assign [class="(?i)linphone"] $ws0
 
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
-set $tn_app1 "google-chrome --password-store=basic"
+set $tn_app1 "google-chrome"
 set $tn_app2 "firefox"
 set $tn_app3 "atom"
 #set $tn_app4 ""
@@ -559,7 +581,7 @@ set $tna_app10 "env QT_AUTO_SCREEN_SCALE_FACTOR=0 vlc"
 set $tna_app11 "env QT_AUTO_SCREEN_SCALE_FACTOR=0 qbittorrent"
 
 # Application variables for numeric keypad
-set $KP_app1 "google-chrome --password-store=basic"
+set $KP_app1 "google-chrome"
 set $KP_app2 "firefox"
 set $KP_app3 "atom"
 set $KP_app4 "hexchat"
@@ -595,12 +617,12 @@ bindsym $altgr+KP_Left exec --no-startup-id $KP_app4
 #bindsym $sup+KP_Prior exec $KP_app9
 
 # Number alternate launcher with AltGr
-# Hint: Altgr+0 (typewriter numkeys)
-bindsym $altgr+rightsinglequotemark exec --no-startup-id $tn_app0
-# Hint: Altgr+minus (typewriter numkeys)
-bindsym $altgr+yen exec --no-startup-id $tna_app10
-# Hint: Altgr+Shift+plus (typewriter numkeys)
-bindsym $altgr+Shift+division exec --no-startup-id $tna_app11
+# Hint: Code 19 rightsinglequotemark (Altgr+0 typewriter numkeys)
+bindcode $altgr+19 exec --no-startup-id $tn_app0
+# Hint: Code 20 yen (Altgr+minus typewriter numkeys)
+bindcode $altgr+20 exec --no-startup-id $tna_app10
+# Hint: Code 21 division (Altgr+Shift+plus typewriter numkeys)
+bindcode $altgr+Shift+21 exec --no-startup-id $tna_app11
 
 # Application laucher mode
 set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent'
@@ -609,7 +631,7 @@ mode "$mode_app" {
       bindsym a exec atom, mode "default"
       bindsym e exec dolphin, mode "default"
       bindsym f exec firefox, mode "default"
-      bindsym c exec google-chrome --password-store=basic, mode "default"
+      bindsym c exec google-chrome, mode "default"
       bindsym v exec vlc mode "default"
       bindsym b exec qbittorrent, mode "default"
 
@@ -620,11 +642,13 @@ mode "$mode_app" {
 
 # Screenshot mode
 set $mode_screenshot 'Screenshot - se[l]ect,f[u]ll'
-# The odiaeresis key is p
-bindsym $altgr+odiaeresis mode "$mode_screenshot"
+# Hint: code 33 odiaeresis (Altgr+p)
+bindcode $altgr+33 mode "$mode_screenshot"
 mode "$mode_screenshot" {
-      bindsym --release u exec --no-startup-id "import -window root $screenshot_dir/screenshot_full_$(date '+%Y%m%d_%H%M%S').png", mode "default"
-      bindsym --release l exec --no-startup-id "import $screenshot_dir/screenshot_slct_$(date '+%Y%m%d_%H%M%S').png", mode "default"
+      # Screenshot from the focused monitor under Sway, using swaymsg and jq
+      bindsym --release u exec --no-startup-id "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') $screenshot_dir/screenshot_full_$(date '+%Y%m%d_%H%M%S').png", mode "default"
+      # Select a region and screenshoot:
+      bindsym --release l exec --no-startup-id "grim -g "$(slurp)" $screenshot_dir/screenshot_slct_$(date '+%Y%m%d_%H%M%S').png", mode "default"
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
@@ -672,52 +696,5 @@ mode "$mode_system" {
 bar {
     swaybar_command waybar
 }
-
-# i3bar configuration
-# Bar on Screen1
-#bar {
-#      # Set font
-#      font pango:Roboto Medium 10
-#
-#      # Status bar
-#      #status_command waybar
-#
-#      # Set i3bar tray output screen
-#      #tray_output $screen0
-#
-#      # Fitt's law
-#      tray_padding 0
-#
-#      # Bar position
-#      position bottom
-#
-#      # Bar display mode
-#      # Keep the bar hidden and show it when Mod1 is pressed
-#      #mode hide
-#      #hidden_state hide
-#      #modifier Mod1
-#
-#      # Custom separator
-#      separator_symbol "|"
-#
-#      # Workspace buttons
-#      workspace_buttons yes
-#
-#      # Mouse button behavior (nop disables clicking)
-#      # Mouse Scroll wheel up
-#      bindsym button4 nop
-#      # Mouse Scroll wheel down
-#      bindsym button5 nop
-#
-#   colors {
-#      background $bar-bg-color
-#      statusline $bar-statusline-color
-#      separator  $bar-separator-color
-#      #                  border                background            text
-#      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
-#      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
-#      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
-#   }
-#}
 
 #include /etc/sway/config.d/*
