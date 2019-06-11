@@ -365,10 +365,7 @@ new_window pixel 3
 # Reload the configuration file
 bindsym $sup+Shift+c reload
 
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $sup+Shift+r restart
-
-# exit sway (logs you out of your Wayland session)
+# Exit sway (logs you out of your Wayland session)
 bindsym $sup+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 #
@@ -538,19 +535,19 @@ no_focus [window_role="(i?)pop-up"]
 #no_focus [window_type="(i?)notification"]
 
 # Assign applications default workspaces
-#assign [class="(?i)google-chrome(-beta)?"] $ws1
-#assign [class="(?i)firefox"] $ws2
+#assign [title="(?i)google-chrome(-beta)?"] $ws1
+#assign [title="(?i)firefox"] $ws2
 assign [class="(?i)atom"] $ws2
-#assign [class="(?i)terminator"] $ws4
-assign [class="(?i)virt-manager"] $ws6
-assign [class="(?i)virtualbox"] $ws6
-assign [class="(?i)steam$"] $ws7
-assign [class="(?i)qbittorrent"] $ws8
-assign [class="(?i)ktorrent"] $ws8
-assign [class="(?i)vlc"] $ws7
-assign [class="(?i)hexchat"] $ws9
-assign [class="(?i)autokey-*"] $ws9
-assign [class="(?i)linphone"] $ws0
+#assign [title="(?i)terminator"] $ws4
+assign [title="(?i)virt-manager"] $ws6
+assign [title="(?i)virtualbox"] $ws6
+assign [title="(?i)steam$"] $ws7
+assign [title="(?i)qbittorrent"] $ws8
+assign [title="(?i)ktorrent"] $ws8
+assign [title="(?i)vlc"] $ws7
+assign [title="(?i)hexchat"] $ws9
+assign [title="(?i)autokey-*"] $ws9
+assign [title="(?i)linphone"] $ws0
 
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
