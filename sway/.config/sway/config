@@ -201,18 +201,18 @@ set $hDP4 'Lenovo Group Limited LEN LT2252pwA V1DFX13'
 
 # Position configuration
 # Hint: most left monitor is pos 0,0
-# h_eDP1 (center) - right of DP4
+# heDP1 (center) - right of DP4
 output $heDP1 mode 1600x900  position 1680,0
-# h_DP3 (right) - right of h_eDP1 (1600+1680=3280)
+# hDP3 (right) - right of h_eDP1 (1600+1680=3280)
 output $hDP3  mode 1360x768  position 3280,0
-# h_DP4 (left) - most left screen
+# hDP4 (left) - most left screen
 output $hDP4  mode 1680x1050 position 0,0
 
 # Disable output
 #output $h_DP3 disable
 #output $h_DP4 disable
 
-# External screen script layout
+# Home screen configuration
 set $mode_display_home 'Home: [M]ain | [R]ight | Righ[t]Left | [L]eft'
 bindsym $sup+Mod1+z mode "$mode_display_home"
 mode "$mode_display_home" {
@@ -220,6 +220,35 @@ mode "$mode_display_home" {
       bindsym r output $hDP3 enable; output $hDP4 disable; mode "default"
       bindsym t output $hDP4 enable; output $hDP3 enable; mode "default"
       bindsym l output $hDP4 enable; output $hDP3 disable; mode "default"
+
+      # Back to normal: Enter or Escape
+      bindsym Return mode "default"
+      bindsym Escape mode "default"
+}
+
+# Work setup
+# Set screen configuration
+# Command: swaymsg -t get_outputs
+set $weDP1 'Unknown 0x04FF 0x00000000'
+set $wDP4 'Lenovo Group Limited L1951p Wide   6V6W9847'
+set $wDP5 'Lenovo Group Limited LEN LT2223pwC VN-874148'
+
+# Hint: most left monitor is pos 0,0
+# weDP1 (center) - right of DP5
+output $weDP1 mode 1920x1080 position 1920,0
+# wDP4 (right) - right of h_eDP1 (1600+1680=3280)
+output $wDP4  mode 1440x900  position 3840,0
+# wDP5 (left) - most left screen
+output $wDP5  mode 1920x1080 position 0,0
+
+# Work screen configuration
+set $mode_display_work 'Work: [M]ain | [R]ight | Righ[t]Left | [L]eft'
+bindsym $sup+Mod1+x mode "$mode_display_work"
+mode "$mode_display_work" {
+      bindsym m output $wDP4 disable; output $wDP5 disable; mode "default"
+      bindsym r output $wDP4 enable; output $wDP5 disable; mode "default"
+      bindsym t output $wDP5 enable; output $wDP4 enable; mode "default"
+      bindsym l output $wDP5 enable; output $wDP4 disable; mode "default"
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
@@ -360,7 +389,8 @@ default_floating_border pixel 3
 # Use Mouse+$sup to drag floating windows to their wanted position
 floating_modifier $sup
 hide_edge_borders both
-new_window pixel 3
+#new_window pixel 3
+default_border pixel 3
 
 # Reload the configuration file
 bindsym $sup+Shift+c reload
