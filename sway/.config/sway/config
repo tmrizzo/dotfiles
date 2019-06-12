@@ -565,11 +565,12 @@ no_focus [window_role="(i?)pop-up"]
 #no_focus [window_type="(i?)notification"]
 
 # Assign applications default workspaces
+# Command: swaymsg -t get_tree |less
 #assign [title="(?i)google-chrome(-beta)?"] $ws1
 #assign [title="(?i)firefox"] $ws2
 assign [class="(?i)atom"] $ws2
 #assign [title="(?i)terminator"] $ws4
-assign [title="(?i)virt-manager"] $ws6
+assign [app_id="(?i)virt-manager"] $ws6
 assign [title="(?i)virtualbox"] $ws6
 assign [title="(?i)steam$"] $ws7
 assign [title="(?i)qbittorrent"] $ws8
