@@ -26,24 +26,3 @@ if [ -f "${HOME}/.bashrc" ] ; then
   source "${HOME}/.bashrc"
 fi
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/usr/bin" ] ; then
-   PATH="${HOME}/usr/bin:${PATH}"
-fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d "${HOME}/usr/man" ]; then
-  MANPATH="${HOME}/usr/man:${MANPATH}"
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d "${HOME}/usr/info" ]; then
-   INFOPATH="${HOME}/usr/info:${INFOPATH}"
-fi
-
-# Set PATH to include android-studio binary
-if [ -d "${HOME}/android-studio/bin" ] ; then
-   PATH="${HOME}/android-studio/bin:${PATH}"
-fi
-
-tput init
