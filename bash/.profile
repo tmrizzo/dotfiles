@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# README
+# The ~/.profile is used by many shells as fallback. This is used by X11.
+# Wayland uses a different approach.
+# The simplest way to set environment variables for a single user under systemd (version 233 or later),
+# is to create a .conf file in ~/.config/environment.d, containing lines of the form NAME=VAL.
+# See man 5 environment.d
+
+# GDM also supports the /usr/share/gdm/env.d/ drop-in directory. Files dropped in there also contain
+# lines of the form NAME=VAL. These affect all users of the system.
+
 # Make vim standard editor
 export EDITOR=vim
 
@@ -39,3 +49,9 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # fonts, since point is a physical unit of measure. Multiple screens may get different scale factors.
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
+# Force wayland on qt apps
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_FORCE_DPI=96
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+PATH="${HOME}/usr/bin:${PATH}
