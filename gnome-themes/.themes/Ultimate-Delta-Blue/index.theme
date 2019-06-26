@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=X-GNOME-Metatheme
-Name=Ultimate-Delta-Blue
-Comment=Easy On The Eyes Gnome Theme
-Encoding=UTF-8
-
-[X-GNOME-Metatheme]
-GtkTheme=Ultimate-Delta-Blue
-ButtonLayout=:minimize,maximize,close

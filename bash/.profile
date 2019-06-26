@@ -50,8 +50,8 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
 # Force wayland on qt apps
-export QT_QPA_PLATFORM=wayland
-export QT_WAYLAND_FORCE_DPI=96
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+#export QT_QPA_PLATFORM=wayland
+#export QT_WAYLAND_FORCE_DPI=96
+#export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
-PATH="${HOME}/usr/bin:${PATH}
+export PATH="${HOME}/usr/bin:${PATH}"
