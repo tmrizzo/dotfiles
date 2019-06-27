@@ -79,28 +79,14 @@ set $altgr Mod5
 # Set tags color for later use
 set $base00 #101218
 set $base01 #1f222d
-set $base02 #252936
-set $base03 #7780a1
-set $base04 #C0C5CE
-set $base05 #d1d4e0
-set $base06 #C9CCDB
-set $base07 #ffffff
-set $base08 #ee829f
-set $base09 #f99170
-set $base0A #ffefcc
-set $base0B #a5ffe1
-set $base0C #97e0ff
-set $base0D #97bbf7
-set $base0E #c0b7f9
-set $base0F #fcc09e
 
 # Set colors
-set $bg-color            #1E1E1E
-set $bg-inactive-color   #323232
-set $bg-urgent-color     #DC322F
 set $bd-color            #1E1E1E
 set $bd-inactive-color   #323232
 set $bd-urgent-color     #CC0000
+set $bg-color            #1E1E1E
+set $bg-inactive-color   #323232
+set $bg-urgent-color     #DC322F
 set $text-color          #FFFFFF
 set $text-inactive-color #828282
 
@@ -116,6 +102,14 @@ set $ws-bd-inactive-color   #1E1E1E
 set $ws-bd-urgent-color     #CC0000
 set $ws-text-color          #FFFFFF
 set $ws-text-inactive-color #828282
+
+# class                 border  backgr. text    indicator child_border
+#client.focused           #be5046 #be5046 #be5046 #be5046   #be5046
+#client.focused_inactive  #5c6370 #3b3228 #ffffff #5c6370   #5c6370
+#client.unfocused         #5c6370 #3b3228 #ffffff #5c6370   #5c6370
+#client.urgent            #cb6077 #3b3228 #ffffff #cb6077   #cb6077
+#client.placeholder      #000000 #3b3228 #ffffff #000000   #0c0c0c
+#client.background 	#fffffff
 
 # Set window colors
 #                        border              background          text                  indicator  child_border
@@ -135,6 +129,9 @@ set $screenshot_dir ~/Pictures/screenshot
 
 # Set custom scripts path
 set $scripts ~/.scripts
+
+# Set py3status base directory
+set $py3status_path ~/.config/sway
 
 # Set workspaces variables and specific icon sets
 set $ws1 "1:"
@@ -160,7 +157,7 @@ set $micmt XF86AudioMicMute
 
 ### Startup
 # Numlock key behavior
-exec_always --no-startup-id numlockx on
+# exec_always --no-startup-id numlockx on
 
 # NetworkManager applet
 exec_always --no-startup-id nm-applet
@@ -363,22 +360,22 @@ bindsym $sup+F4 exec "amixer -q -D pulse sset Capture toggle"
 #
 # Basics:
 #
-# start a terminal
+# Start a terminal
 #bindsym $mod+Return exec $term
 bindsym $sup+t exec --no-startup-id $term
 
-# kill focused window
+# Kill focused window
 #bindsym $mod+Shift+q kill
 bindsym $sup+Escape kill
 
-# start your launcher
-#bindsym $mod+d exec $menu
+# Start your launcher
+#bindsym $sup+d exec $menu
 
 # Rofi launcher
 bindsym $sup+d exec rofi -theme tmrizzo_theme.rasi -show drun
 bindsym $sup+dead_grave exec rofi -theme tmrizzo_theme.rasi -show run
 bindsym $sup+c exec rofi -theme tmrizzo_theme.rasi -show window
-bindsym F12 exec rofi -theme tmrizzo_theme.rasi -show ssh
+#bindsym F12 exec rofi -theme tmrizzo_theme.rasi -show ssh
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -727,7 +724,47 @@ mode "$mode_system" {
 #}
 
 bar {
-    swaybar_command waybar
+      # Bar ID
+      #id 0
+
+      # Set font
+      font pango:Inconsolata 11
+
+      # py3status status bar
+      status_command py3status -c $py3status_path/py3status.conf
+
+      # Set output screen
+      #output $screen1
+
+      # Set i3bar tray output screen
+      tray_output eDP-1
+
+      # Fitt's law
+      tray_padding 0
+
+      # Bar position
+      position bottom
+
+      # Custom separator
+      separator_symbol "|"
+
+      # Workspace buttons
+      workspace_buttons yes
+
+   colors {
+      #background $bar-bg-color
+      background $bar-bg-color
+      statusline $bar-statusline-color
+      separator  $bar-separator-color
+      #                  border                background            text
+      focused_workspace  $ws-bd-color          $ws-bg-color          $ws-text-color
+      inactive_workspace $ws-bd-inactive-color $ws-bg-inactive-color $ws-text-inactive-color
+      urgent_workspace   $ws-bd-urgent-color   $ws-bg-urgent-color   $ws-text-color
+   }
 }
 
-#include /etc/sway/config.d/*
+#bar {
+#    swaybar_command waybar
+#}
+
+##include /etc/sway/config.d/*
