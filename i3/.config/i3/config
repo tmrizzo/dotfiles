@@ -555,6 +555,7 @@ assign [class="(?i)virt-manager"] $ws6
 assign [class="(?i)virtualbox"] $ws6
 assign [class="(?i)steam$"] $ws7
 assign [class="(?i)qbittorrent"] $ws8
+assign [class="(?i)transmission"] $ws8
 assign [class="(?i)ktorrent"] $ws8
 assign [class="(?i)vlc"] $ws7
 assign [class="(?i)hexchat"] $ws9
@@ -587,7 +588,7 @@ set $tn_app0 "nautilus"
 #set $tna_app9 ""
 #set $tna_app0 ""
 set $tna_app10 "env QT_AUTO_SCREEN_SCALE_FACTOR=0 vlc"
-set $tna_app11 "env QT_AUTO_SCREEN_SCALE_FACTOR=0 qbittorrent"
+set $tna_app11 "transmission-gtk"
 
 # Application variables for numeric keypad
 set $KP_app1 "google-chrome --password-store=basic"
@@ -634,15 +635,15 @@ bindsym $altgr+yen exec --no-startup-id $tna_app10
 bindsym $altgr+Shift+division exec --no-startup-id $tna_app11
 
 # Application laucher mode
-set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,q[b]itorrent'
+set $mode_app '[a]tom,[e]explorer,[f]irefox,[c]hrome,[v]ideo,[t]ransmission'
 bindsym $sup+x mode "$mode_app"
 mode "$mode_app" {
       bindsym a exec atom, mode "default"
       bindsym e exec dolphin, mode "default"
       bindsym f exec firefox, mode "default"
       bindsym c exec google-chrome --password-store=basic, mode "default"
-      bindsym v exec vlc mode "default"
-      bindsym b exec qbittorrent, mode "default"
+      bindsym v exec vlc, mode "default"
+      bindsym t exec transmission-gtk, mode "default"
 
       # Back to normal: Enter or Escape
       bindsym Return mode "default"
