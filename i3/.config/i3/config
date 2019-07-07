@@ -262,7 +262,8 @@ set $touchpad "SynPS/2 Synaptics TouchPad"
 
 # Enable click touch on touchpads
 # Commands: xinput list and xinput list-props "SynPS/2 Synaptics TouchPad"
-exec --no-startup-id xinput set-prop $touchpad "libinput Tapping Enabled" 1
+exec xinput set-prop $touchpad "libinput Tapping Enabled" 1
+exec xinput set-prop "Synaptics TM2722-001" "libinput Tapping Enabled" 1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -564,7 +565,7 @@ assign [class="(?i)linphone"] $ws0
 
 # Program-Related Bindings
 # Application variables for typewriter numeric keys
-set $tn_app1 "google-chrome --password-store=basic"
+set $tn_app1 "google-chrome"
 set $tn_app2 "firefox"
 set $tn_app3 "atom"
 #set $tn_app4 ""
@@ -591,7 +592,7 @@ set $tna_app10 "env QT_AUTO_SCREEN_SCALE_FACTOR=0 vlc"
 set $tna_app11 "transmission-gtk"
 
 # Application variables for numeric keypad
-set $KP_app1 "google-chrome --password-store=basic"
+set $KP_app1 "google-chrome"
 set $KP_app2 "firefox"
 set $KP_app3 "atom"
 set $KP_app4 "hexchat"
@@ -641,7 +642,7 @@ mode "$mode_app" {
       bindsym a exec atom, mode "default"
       bindsym e exec dolphin, mode "default"
       bindsym f exec firefox, mode "default"
-      bindsym c exec google-chrome --password-store=basic, mode "default"
+      bindsym c exec google-chrome, mode "default"
       bindsym v exec vlc, mode "default"
       bindsym t exec transmission-gtk, mode "default"
 
