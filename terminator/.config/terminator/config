@@ -1,7 +1,6 @@
-# vi: set ft=dosini :
 [global_config]
   always_split_with_profile = True
-  borderless = True
+  enabled_plugins = TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   extra_styling = False
   focus = mouse
   title_hide_sizetext = True
@@ -29,7 +28,7 @@
 [plugins]
 [profiles]
   [[default]]
-    background_darkness = 0.8
+    background_darkness = 0.9
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#aaaaaa"
