@@ -6,6 +6,13 @@
   title_hide_sizetext = True
   title_inactive_bg_color = "#000000"
 [keybindings]
+  split_horiz = <Alt>minus
+  split_vert = <Alt>equal
+  switch_to_tab_1 = <Shift><Alt>exclam
+  switch_to_tab_10 = <Shift><Alt>at
+  switch_to_tab_2 = <Shift><Alt>numbersign
+  switch_to_tab_3 = <Shift><Alt>dollar
+  switch_to_tab_4 = <Shift><Alt>percent
 [layouts]
   [[default]]
     [[[child0]]]
