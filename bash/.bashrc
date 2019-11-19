@@ -66,6 +66,31 @@ shopt -s checkwinsize
 [[ -f /etc/profile.d/bash_completion.sh ]] && . /etc/profile.d/bash_completion.sh
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
+# Make vim standard editor
+export EDITOR=vim
+
+# Make less the default pager
+export PAGER=less
+
+# Use less pager with these options
+export LESS='-RSJMsi'
+
+# less Colors for man Pages
+# begin blinking
+export LESS_TERMCAP_mb=$'\e[01;31m'
+# begin bold
+export LESS_TERMCAP_md=$'\e[01;38;5;74m'
+# end mode
+export LESS_TERMCAP_me=$'\e[0m'
+# end standout-mode
+export LESS_TERMCAP_se=$'\e[0m'
+# begin standout-mode - info box
+export LESS_TERMCAP_so=$'\e[38;5;246m'
+# end underline
+export LESS_TERMCAP_ue=$'\e[0m'
+# begin underline
+export LESS_TERMCAP_us=$'\e[04;38;5;146m'
+
 # History Options
 # Don't add duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
