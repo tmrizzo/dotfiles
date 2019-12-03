@@ -163,6 +163,11 @@ if [ -d "${HOME}/usr/bin" ] ; then
    PATH="${HOME}/usr/bin:${PATH}"
 fi
 
+# Set PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/.local/bin" ] ; then
+   PATH="${HOME}/.local/bin:${PATH}"
+fi
+
 # Set MANPATH so it includes users' private man if it exists
 if [ -d "${HOME}/usr/man" ]; then
   MANPATH="${HOME}/usr/man:${MANPATH}"
