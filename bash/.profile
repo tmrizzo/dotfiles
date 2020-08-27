@@ -13,7 +13,7 @@
 # It should have been set by the login manager, according to the value of the DesktopNames found in the session file.
 # the entry in the session file has multiple values separated in the usual way: with a semicolon.
 #export XDG_CURRENT_DESKTOP=KDE
-export XDG_CURRENT_DESKTOP=GNOME
+#export XDG_CURRENT_DESKTOP=GNOME
 
 # Qt5
 # Unlike Qt4, Qt5 doesn't ship a qtconfig utility to configure fonts, icons or styles. Instead, it will try to use
@@ -21,7 +21,8 @@ export XDG_CURRENT_DESKTOP=GNOME
 # it can lead to missing icons in Qt5 applications. One way to solve this is to fake the running desktop environment
 # by setting XDG_CURRENT_DESKTOP=KDE or GNOME, and then using the corresponding configuration application to set the
 # desired icon set.
-export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_QPA_PLATFORMTHEME=gnome
 
 # Disable QT scale factor
 # For per application configuration add env QT_AUTO_SCREEN_SCALE_FACTOR=0
