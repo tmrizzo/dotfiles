@@ -138,8 +138,8 @@ export TERM=xterm-256color
 # .local/share/applications or /usr/share/applications/
 # Enables automatic scaling, based on the pixel density of the monitor. This will not change the size of point sized
 # fonts, since point is a physical unit of measure. Multiple screens may get different scale factors.
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export QT_QPA_PLATFORMTHEME='gnome'
+#export QT_AUTO_SCREEN_SCALE_FACTOR=0
+#export QT_QPA_PLATFORMTHEME='gnome'
 
 # Aliases
 #

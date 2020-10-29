@@ -21,6 +21,16 @@ else
         PS1+="${GREEN}[\w]${RESET}"
 fi
 
+# for toolbox container environment
+if [ -f /run/.containerenv ] && [ -f /run/.toolboxenv ]; then
+     PS1="" # start prompt as blank
+     if [[ $EXIT -ne 0 ]]; then
+            PS1+="${RED}⬢${RED}[@\h \w]${RESET}"
+     else
+            PS1+="${RED}⬢${GREEN}[@\h \w]${RESET}"
+     fi
+fi
+
 # git directory check
 if git rev-parse --git-dir &>/dev/null; then
         # check if HEAD is detached from branch
@@ -43,6 +53,7 @@ if git rev-parse --git-dir &>/dev/null; then
 else
         PS1+=""
 fi
+
 PS1+="${BLUE} >> ${RESET}"
 
 }

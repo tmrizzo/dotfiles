@@ -8,10 +8,10 @@ alias dnfr='sudo dnf remove'
 
 # Flatpak alias
 alias fpku='flatpak --user '
-alias fpkuins='flatpak --user install '
-alias fpkurem='flatpak --user uninstall '
-alias fpkulsi='flatpak --user list '
-alias fpkulsr='flatpak --user remote-ls '
+alias fpkui='flatpak --user install '
+alias fpkur='flatpak --user uninstall '
+alias fpkuls='flatpak --user list '
+alias fpkurl='flatpak --user remote-ls '
 alias fpkurun='flatpak --user runi '
 
 # Quick python HTTP Server

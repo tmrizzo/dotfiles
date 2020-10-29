@@ -104,7 +104,7 @@ alias getmp3='youtube-dl --audio-format mp3 $@'
 
 case "$OSTYPE" in
     linux*)
-		OSCODENAME=$(lsb_release -si)
+		OSCODENAME=$(\grep '^ID=' /etc/os-release |cut -d '=' -f2)
 	;;
     cygwin)
 		OSCODENAME="cygwin"
@@ -114,10 +114,10 @@ case "$OSTYPE" in
 esac
 
 case "${OSCODENAME}" in
-    Fedora)
+    fedora)
 		source ~/.bashrc.d/bash_aliases.fedora
 	;;
-    Debian|Ubuntu)
+    debian|ubuntu)
 		source ~/.bashrc.d/bash_aliases.ubuntu
 	;;
     *)
