@@ -2,7 +2,9 @@
 # vim:fdm=marker
 # PROMPT {{{
 __prompt_command(){
-local EXIT="$?" # This needs to be first
+# This needs to be first
+local EXIT="$?"
+PROMPT_DIRTRIM=2
 
 # Colors
 local RESET='\[\e[0m\]'
@@ -25,9 +27,9 @@ fi
 if [ -f /run/.containerenv ] && [ -f /run/.toolboxenv ]; then
      PS1="" # start prompt as blank
      if [[ $EXIT -ne 0 ]]; then
-            PS1+="${RED}⬢${RED}[@\h \w]${RESET}"
+            PS1+="${RED}⬢ ${RED}[@\h \w]${RESET}"
      else
-            PS1+="${RED}⬢${GREEN}[@\h \w]${RESET}"
+            PS1+="${RED}⬢ ${GREEN}[@\h \w]${RESET}"
      fi
 fi
 
