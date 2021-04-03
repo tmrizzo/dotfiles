@@ -7,12 +7,12 @@ alias dnfs='dnf search'
 alias dnfr='sudo dnf remove'
 
 # Flatpak alias
-alias fpku='flatpak --user '
-alias fpkui='flatpak --user install '
-alias fpkur='flatpak --user uninstall '
-alias fpkuls='flatpak --user list '
-alias fpkurl='flatpak --user remote-ls '
-alias fpkurun='flatpak --user runi '
+alias ftki='flatpak install'
+alias ftks='flatpak search'
+alias ftkr='flatpak uninstall'
+alias ftku='flatpak update'
+alias ftkls='flatpak list'
+alias ftkrl='flatpak remote-ls'
 
 # Quick python HTTP Server
 alias pyhttp='python -m SimpleHTTPServer 8000'

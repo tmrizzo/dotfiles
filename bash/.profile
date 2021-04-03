@@ -22,7 +22,7 @@
 # by setting XDG_CURRENT_DESKTOP=KDE or GNOME, and then using the corresponding configuration application to set the
 # desired icon set.
 #export QT_QPA_PLATFORMTHEME=qt5ct
-export QT_QPA_PLATFORMTHEME=gnome
+#export QT_QPA_PLATFORMTHEME=gnome
 
 # Disable QT scale factor
 # For per application configuration add env QT_AUTO_SCREEN_SCALE_FACTOR=0
