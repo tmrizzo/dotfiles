@@ -10,7 +10,7 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 ```
 $ dnf install -y stow pcre-tools vim tmux
 $ mkdir ~/git
-$ git clone https://github.com/tiagomdrizzo/dotfiles
+$ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
 $ stow -t ~ *
 ```
@@ -24,6 +24,12 @@ $ stow -t ~ *
 ```
 
 - Don't want to use Stow? Symlink it manually.
+
+### Packages
+
+```
+# dnf install codium vim pcre-tools stow tmux gnome-tweak-tool tilix toolbox podman podman-docker podman-compose pavucontrol
+```
 
 ### Flatpak
 
