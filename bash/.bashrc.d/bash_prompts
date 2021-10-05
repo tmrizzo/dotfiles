@@ -56,7 +56,7 @@ else
         PS1+=""
 fi
 
-PS1+="${BLUE} >> ${RESET}"
+PS1+="${BLUE}\n> ${RESET}"
 
 }
 PROMPT_COMMAND=__prompt_command

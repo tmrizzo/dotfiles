@@ -117,7 +117,7 @@ case "${OSCODENAME}" in
     fedora)
 		source ~/.bashrc.d/bash_aliases.fedora
 	;;
-    debian|ubuntu)
+    debian|ubuntu|pop)
 		source ~/.bashrc.d/bash_aliases.ubuntu
 	;;
     *)
