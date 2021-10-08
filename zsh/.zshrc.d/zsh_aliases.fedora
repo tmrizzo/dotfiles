@@ -1,0 +1,18 @@
+# ~/.zshrc.d/zsh_aliases.fedora
+#
+# DNF alias
+alias dnfi='sudo dnf install'
+alias dnfu='sudo dnf upgrade -y --refresh'
+alias dnfs='dnf search'
+alias dnfr='sudo dnf remove'
+
+# Flatpak alias
+alias ftki='flatpak install'
+alias ftks='flatpak search'
+alias ftkr='flatpak uninstall'
+alias ftku='flatpak update'
+alias ftkls='flatpak list'
+alias ftkrl='flatpak remote-ls'
+
+# Quick python HTTP Server
+alias pyhttp='python -m SimpleHTTPServer 8000'
