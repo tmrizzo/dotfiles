@@ -101,6 +101,7 @@ alias vi='vim'
 alias whence='type -a'
 #alias less='less -r'                              # raw control characters
 alias getmp3='youtube-dl --audio-format mp3 $@'
+alias kubectl='minikube kubectl --'
 
 case "$OSTYPE" in
     linux*)
