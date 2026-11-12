@@ -27,9 +27,20 @@ set +o ignoreeof
 # Make bash append rather than overwrite the history on disk
 shopt -s histappend
 #
+# Re-edit failed history expansions and verify !! / !$ before running
+shopt -s histreedit histverify
+#
 # When changing directory small typos can be ignored by bash
 # for example, cd /vr/lgo/apaache would find /var/log/apache
-# shopt -s cdspell
+shopt -s cdspell
+# Same tolerance when tab-completing directory names
+shopt -s dirspell
+# Type a directory name alone to cd into it
+shopt -s autocd
+# **/*.conf matches recursively
+shopt -s globstar
+# A bare Tab on an empty line does not try to complete everything
+shopt -s no_empty_cmd_completion
 
 shopt -s checkwinsize
 
@@ -53,6 +64,10 @@ fi
 # Any completions you add in ~/.bash_completion are sourced last.
 [[ -f /etc/profile.d/bash_completion.sh ]] && . /etc/profile.d/bash_completion.sh
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
+
+# fzf: fuzzy finder key bindings (Ctrl-R history, Alt-C cd)
+# Install: dnf install fzf
+[[ -f /usr/share/fzf/shell/key-bindings.bash ]] && . /usr/share/fzf/shell/key-bindings.bash
 
 # Make vim standard editor
 export EDITOR=vim
@@ -128,6 +143,10 @@ export HISTSIZE=1000000
 
 # PATH / MANPATH / INFOPATH (after brew so user bins win)
 [[ -f "${HOME}/.bashrc.d/bash_path" ]] && . "${HOME}/.bashrc.d/bash_path"
+
+# zoxide: smarter cd with history (z dotf)
+# Install: dnf install zoxide
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
 
 # Umask
 # /etc/profile sets 022, removing write perms to group + others.

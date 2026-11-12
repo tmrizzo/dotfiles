@@ -55,8 +55,13 @@ fi
 
 PS1+="${BLUE}\n> ${RESET}"
 
-# Append this command to the on-disk history (do not overwrite PROMPT_COMMAND elsewhere)
+# Append this command to the on-disk history and pick up history written by
+# other sessions (do not overwrite PROMPT_COMMAND elsewhere)
 history -a
+history -n
+
+# Terminal title: user@host:cwd (works in terminator/tmux)
+printf '\033]0;%s@%s:%s\007' "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"
 
 }
 PROMPT_COMMAND=__prompt_command

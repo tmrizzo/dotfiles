@@ -23,10 +23,16 @@ alias ~git="cd ~/git"
 alias rm='rm -vi'
 alias cp='cp -vi'
 alias mv='mv -vi'
+# Create parent directories and report what was made
+alias mkdir='mkdir -pv'
 #
 # Default to human readable figures
 alias df='df -hTP'
 alias du='du -xk'
+
+# Colorize common text tools
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
 
 # Directory: list
 #
@@ -100,6 +106,16 @@ alias vi='vim'
 alias whence='type -a'
 #alias less='less -r'                              # raw control characters
 alias getmp3='yt-dlp -x --audio-format mp3'
+# Inspect PATH one entry per line
+alias path='echo -e ${PATH//:/\\n}'
+# Public IP address
+alias myip='curl -s ifconfig.me'
+
+# Modern replacements — only active when the tool is installed
+# Install: dnf install bat fd-find ripgrep
+command -v bat >/dev/null 2>&1 && alias cat='bat -pp'
+command -v fd  >/dev/null 2>&1 && alias fihe='fd -i' && alias fif='fd -t f -i' && alias fid='fd -t d -i'
+command -v rg  >/dev/null 2>&1 && alias cgrep='rg -v "^\s*(#|;|$)"'
 
 # Detect the running distribution (see man os-release)
 OSCODENAME=""

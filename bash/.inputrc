@@ -1,0 +1,26 @@
+# ~/.inputrc — readline configuration (bash and other readline apps)
+# See man 3 readline / bash(1) READLINE section
+
+$include /etc/inputrc
+
+# Case-insensitive completion, treat - and _ as equal
+set completion-ignore-case on
+set completion-map-case on
+
+# Show all matches immediately instead of double-Tab
+set show-all-if-ambiguous on
+
+# Append / to completed directories, also when reached via symlink
+set mark-directories on
+set mark-symlinked-directories on
+
+# Color file names and common prefix in completion listings
+set colored-stats on
+set colored-completion-prefix on
+
+# Don't ring the bell on completion
+set bell-style none
+
+# Type a prefix, then ↑/↓ to search history matching that prefix
+"\e[A": history-search-backward
+"\e[B": history-search-forward
