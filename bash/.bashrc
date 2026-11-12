@@ -6,23 +6,7 @@
 # with this software.
 # If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-# base-files version 4.1-1
-
 # ~/.bashrc: executed by bash(1) for interactive shells.
-
-# The latest version as installed by the Cygwin Setup program can
-# always be found at /etc/defaults/etc/skel/.bashrc
-
-# Modifying /etc/skel/.bashrc directly will prevent
-# setup from updating it.
-
-# The copy in your home directory (~/.bashrc) is yours, please
-# feel free to customise it to create a shell
-# environment to your liking.  If you feel a change
-# would be benifitial to all, please feel free to send
-# a patch to the cygwin mailing list.
-
-# User dependent .bashrc file
 
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
@@ -47,8 +31,12 @@ shopt -s histappend
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 # shopt -s cdspell
 
-#
 shopt -s checkwinsize
+
+# Use the 256-color dircolors scheme when the terminal supports it
+if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]; then
+	eval "$(dircolors -b "${HOME}/.bashrc.d/dircolors.256dark")"
+fi
 
 # These completion tuning parameters change the default behavior of bash_completion:
 #
@@ -101,8 +89,8 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # History Options
-# Don't add duplicate lines in the history.
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+# Ignore duplicates and spaces-prefixed lines; erase older duplicates.
+export HISTCONTROL=ignoreboth:erasedups
 
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
@@ -115,9 +103,6 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:history'
 # Add the timestamp of each command in its history
 export HISTTIMEFORMAT="%F %T "
 
-# Whenever displaying the prompt, write the previous line to disk
-export PROMPT_COMMAND="history -a"
-
 # Set the number of lines or commands that are stored in memory in a history list
 # while your bash session is ongoing
 export HISTFILESIZE=1000000
@@ -127,72 +112,28 @@ export HISTFILESIZE=1000000
 # for use in future sessions
 export HISTSIZE=1000000
 
-# Set terminal to 256 colors mode
-#export TERM=xterm
-#export TERM=xterm-16color
-export TERM=xterm-256color
-
-# Disable QT scale factor
-# For per application configuration add env QT_AUTO_SCREEN_SCALE_FACTOR=0
-# to the Exec line inside the app_name.desktop file in the directory:
-# .local/share/applications or /usr/share/applications/
-# Enables automatic scaling, based on the pixel density of the monitor. This will not change the size of point sized
-# fonts, since point is a physical unit of measure. Multiple screens may get different scale factors.
-#export QT_AUTO_SCREEN_SCALE_FACTOR=0
-#export QT_QPA_PLATFORMTHEME='gnome'
+# Let the terminal / multiplexer set TERM; do not force xterm-256color.
 
 # Aliases
-#
-# Some people use a different file for aliases
 [[ -f "${HOME}/.bashrc.d/bash_aliases" ]] && . "${HOME}/.bashrc.d/bash_aliases"
 
 # Functions
-#
-# Some people use a different file for functions
 [[ -f "${HOME}/.bashrc.d/bash_functions" ]] && . "${HOME}/.bashrc.d/bash_functions"
-#
-# Regular expressions
-#[[ -f "${HOME}/.bashrc.d/bash_regex" ]] && . "${HOME}/.bashrc.d/bash_regex"
 
-# Prompts
-#
-# Some people use a different file for functions
+# Prompts (sets PROMPT_COMMAND, including history -a)
 [[ -f "${HOME}/.bashrc.d/bash_prompts" ]] && . "${HOME}/.bashrc.d/bash_prompts"
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/usr/bin" ] ; then
-   PATH="${HOME}/usr/bin:${PATH}"
-fi
+# Local env / secrets (gitignored) — brew shellenv lives here
+[[ -f "${HOME}/.bashrc.d/secrets.vars" ]] && . "${HOME}/.bashrc.d/secrets.vars"
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/.local/bin" ] ; then
-   PATH="${HOME}/.local/bin:${PATH}"
-fi
-
-# Set MANPATH so it includes users' private man if it exists
-if [ -d "${HOME}/usr/man" ]; then
-  MANPATH="${HOME}/usr/man:${MANPATH}"
-fi
-
-# Set INFOPATH so it includes users' private info if it exists
-if [ -d "${HOME}/usr/info" ]; then
-   INFOPATH="${HOME}/usr/info:${INFOPATH}"
-fi
-
-# Set PATH to include android-studio binary
-if [ -d "${HOME}/android-studio/bin" ] ; then
-   PATH="${HOME}/android-studio/bin:${PATH}"
-fi
+# PATH / MANPATH / INFOPATH (after brew so user bins win)
+[[ -f "${HOME}/.bashrc.d/bash_path" ]] && . "${HOME}/.bashrc.d/bash_path"
 
 # Umask
 # /etc/profile sets 022, removing write perms to group + others.
 # Set a more restrictive umask: i.e. no exec perms for others:
-umask 027
+#umask 027
 
 # Vagrant
-# Global Vagrant variables
-# Configures the default provider Vagrant will use.
 export VAGRANT_DEFAULT_PROVIDER=libvirt
-
-# Configures providers that Vagrant should prefer
 export VAGRANT_PREFERRED_PROVIDERS=libvirt

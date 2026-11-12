@@ -1,0 +1,41 @@
+# vim:ft=sh
+# ~/.bashrc.d/bash_path — prepend user paths once (safe to re-source)
+
+__path_prepend() {
+	case ":${PATH}:" in
+		*:"$1":*) ;;
+		*) PATH="$1${PATH:+:$PATH}" ;;
+	esac
+}
+
+__path_append() {
+	case ":${PATH}:" in
+		*:"$1":*) ;;
+		*) PATH="${PATH:+$PATH:}$1" ;;
+	esac
+}
+
+[ -d "${HOME}/usr/bin" ] && __path_prepend "${HOME}/usr/bin"
+[ -d "${HOME}/.local/bin" ] && __path_prepend "${HOME}/.local/bin"
+[ -d "${HOME}/android-studio/bin" ] && __path_prepend "${HOME}/android-studio/bin"
+[ -d "${HOME}/.opencode/bin" ] && __path_prepend "${HOME}/.opencode/bin"
+[ -d "${HOME}/.lmstudio/bin" ] && __path_append "${HOME}/.lmstudio/bin"
+
+if [ -d "${HOME}/usr/man" ]; then
+	case ":${MANPATH}:" in
+		*:"${HOME}/usr/man":*) ;;
+		*) MANPATH="${HOME}/usr/man${MANPATH:+:$MANPATH}" ;;
+	esac
+	export MANPATH
+fi
+
+if [ -d "${HOME}/usr/info" ]; then
+	case ":${INFOPATH}:" in
+		*:"${HOME}/usr/info":*) ;;
+		*) INFOPATH="${HOME}/usr/info${INFOPATH:+:$INFOPATH}" ;;
+	esac
+	export INFOPATH
+fi
+
+export PATH
+unset -f __path_prepend __path_append

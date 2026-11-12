@@ -36,16 +36,13 @@ fi
 # git directory check
 if git rev-parse --git-dir &>/dev/null; then
         # check if HEAD is detached from branch
-        if [[ $(git status) =~ "detached" ]]; then
-                BRANCH=$(git status | awk '/detached/ {print $4}')
-        else
-                BRANCH=$(git symbolic-ref --short HEAD)
-        fi
+        BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null \
+                || git describe --tags --exact-match 2>/dev/null \
+                || git rev-parse --short HEAD)
 
         # check how many uncommitted changes
-        ## condition check is in brackets to make sure it only reports a number < zero
-        if [[ $(git status -s --porcelain --ignore-submodules=dirty) ]]; then
-                DIRTY=$(git status -s --porcelain --ignore-submodules=dirty | wc -l)
+        DIRTY=$(git status --porcelain --ignore-submodules=dirty | wc -l)
+        if (( DIRTY > 0 )); then
                 STATUS="${RESET}+${RED}${DIRTY}${PURPLE}"
         else
                 STATUS=""
@@ -57,6 +54,9 @@ else
 fi
 
 PS1+="${BLUE}\n> ${RESET}"
+
+# Append this command to the on-disk history (do not overwrite PROMPT_COMMAND elsewhere)
+history -a
 
 }
 PROMPT_COMMAND=__prompt_command

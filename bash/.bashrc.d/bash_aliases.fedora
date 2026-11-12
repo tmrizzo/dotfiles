@@ -15,4 +15,4 @@ alias ftkls='flatpak list'
 alias ftkrl='flatpak remote-ls'
 
 # Quick python HTTP Server
-alias pyhttp='python -m SimpleHTTPServer 8000'
+alias pyhttp='python3 -m http.server 8000'
