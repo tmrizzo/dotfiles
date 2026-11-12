@@ -7,7 +7,10 @@ __prompt_command() {
 
 	# --- duration of the last command (bash >= 5, pure arithmetic) ---------
 	# EPOCHREALTIME always carries exactly 6 fractional digits, so stripping
-	# the dot yields reliable microseconds. _prompt_start is stamped by PS0.
+	# the dot yields reliable microseconds. _prompt_start is stamped by the
+	# DEBUG trap below. Guard against restamping while the prompt itself
+	# runs (its git/history commands would otherwise reset the stamp).
+	_prompt_busy=1
 	local dur=""
 	if [[ -n ${_prompt_start:-} ]]; then
 		local elapsed=$(( ${EPOCHREALTIME//./} - _prompt_start ))
@@ -90,11 +93,24 @@ __prompt_command() {
 	# Terminal title: user@host:cwd (works in terminator/konsole/tmux)
 	printf '\033]0;%s%s:%s\007' "${in_container:+⬢ }" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"
 
+	# release the preexec guard
+	unset _prompt_busy
+
 }
 
-# PS0 stamps the time (in microseconds) just before the command runs,
-# for the duration segment above
-PS0='${_prompt_start:=${EPOCHREALTIME//./}}'
+# Stamp the start time of each command. PS0 cannot be used for this:
+# bash displays PS0's expansion before every command, which would print
+# the raw timestamp into the terminal.
+__prompt_preexec() {
+	[[ -n ${_prompt_busy:-} ]] && return
+	# never stamp for the prompt itself (invocation or internals)
+	case ${BASH_COMMAND:-} in
+		__prompt_command*) return ;;
+	esac
+	_prompt_start=${EPOCHREALTIME//./}
+}
+trap '__prompt_preexec' DEBUG
+
 PROMPT_COMMAND=__prompt_command
 
 # }}}
