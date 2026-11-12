@@ -3,13 +3,14 @@
 #
 trackitem ()
 {
-	curl "http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=$@" | sed -e 's/<.*>//g'
+	curl -s "https://www2.correios.com.br/sistemas/rastreamento/newdetalhe.cfm?P_LINGUA=001&P_TIPO=001&P_COD_UNI=$1" \
+		| sed -e 's/<[^>]*>//g' -e '/^[[:space:]]*$/d'
 }
 
 # Create a directory and "cd" to it
 mkd () {
-  mkdir -p $1
-  cd $1
+  mkdir -p "$1"
+  cd "$1" || return 1
 }
 
 #

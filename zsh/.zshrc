@@ -153,35 +153,40 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Regular expressions
 #[[ -f "$HOME/.zshrc.d/zsh_regex" ]] && . "$HOME/.zshrc.d/zsh_regex"
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/usr/bin" ]; then
-   PATH="$HOME/usr/bin:$PATH"
-fi
+# Set PATH so it includes user's private bins if they exist (idempotent,
+# safe to re-source; mirrors ~/.bashrc.d/bash_path)
+__path_prepend() {
+	case ":${PATH}:" in
+		*:"$1":*) ;;
+		*) PATH="$1${PATH:+:$PATH}" ;;
+	esac
+}
+__path_append() {
+	case ":${PATH}:" in
+		*:"$1":*) ;;
+		*) PATH="${PATH:+$PATH:}$1" ;;
+	esac
+}
 
-# Set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-   PATH="$HOME/.local/bin:$PATH"
-fi
+[ -d "$HOME/usr/bin" ] && __path_prepend "$HOME/usr/bin"
+[ -d "$HOME/.local/bin" ] && __path_prepend "$HOME/.local/bin"
+[ -d "$HOME/android-studio/bin" ] && __path_prepend "$HOME/android-studio/bin"
+[ -d "$HOME/.lmstudio/bin" ] && __path_append "$HOME/.lmstudio/bin"
 
-# Set MANPATH so it includes users' private man if it exists
 if [ -d "$HOME/usr/man" ]; then
-  MANPATH="$HOME/usr/man:$MANPATH"
+	MANPATH="$HOME/usr/man:${MANPATH:-}"
 fi
 
-# Set INFOPATH so it includes users' private info if it exists
 if [ -d "$HOME/usr/info" ]; then
-   INFOPATH="$HOME/usr/info:$INFOPATH"
+	INFOPATH="$HOME/usr/info:${INFOPATH:-}"
 fi
 
-# Set PATH to include android-studio binary
-if [ -d "$HOME/android-studio/bin" ]; then
-   PATH="$HOME/android-studio/bin:$PATH"
-fi
+unset -f __path_prepend __path_append
 
 # Umask
 # /etc/profile sets 022, removing write perms to group + others.
 # Set a more restrictive umask: i.e. no exec perms for others:
-umask 027
+#umask 027
 
 # Vagrant
 # Global Vagrant variables
@@ -190,14 +195,3 @@ export VAGRANT_DEFAULT_PROVIDER=libvirt
 
 # Configures providers that Vagrant should prefer
 export VAGRANT_PREFERRED_PROVIDERS=libvirt
-
-# Prompts
-# Remove the machine@user name from the prompt if not logged in as the default user or
-# you are not in an ssh client shell. If regularly ssh'ing to other server with multiple
-# terminals open, you know which machine and user you are logged in as inside that terminal
-prompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-  fi
-}
-
