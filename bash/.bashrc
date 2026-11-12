@@ -50,6 +50,10 @@ if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]
 	# The scheme's di=38;5;33 (dark blue) is hard to read on dark terminals;
 	# use a brighter blue for directories instead
 	LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=01;38;5;75"
+	# Same for its gray tones: plain files (244) and docs/configs (245) get
+	# brighter variants. Junk files (*.bak, *.swp, 240) stay dim on purpose.
+	LS_COLORS="${LS_COLORS//00;38;5;244/00;38;5;250}"
+	LS_COLORS="${LS_COLORS//01;38;5;245/01;38;5;254}"
 	export LS_COLORS
 fi
 
