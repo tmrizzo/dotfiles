@@ -5,14 +5,13 @@ __prompt_command() {
 	local EXIT="$?"
 	PROMPT_DIRTRIM=3
 
-	# --- duration of the last command (bash >= 5, no forks) --------------
+	# --- duration of the last command (bash >= 5, pure arithmetic) ---------
+	# EPOCHREALTIME always carries exactly 6 fractional digits, so stripping
+	# the dot yields reliable microseconds. _prompt_start is stamped by PS0.
 	local dur=""
 	if [[ -n ${_prompt_start:-} ]]; then
-		local d
-		d=$(bc <<< "${EPOCHREALTIME} - ${_prompt_start}" 2>/dev/null)
-		if [[ -n $d ]] && (( ${d%%.*} > 2 )); then
-			dur=" ${d%.*}s"
-		fi
+		local elapsed=$(( ${EPOCHREALTIME//./} - _prompt_start ))
+		(( elapsed > 2000000 )) && dur=" $(( elapsed / 1000000 ))s"
 	fi
 	_prompt_start=""
 
@@ -93,8 +92,9 @@ __prompt_command() {
 
 }
 
-# PS0 stamps the time just before the command runs (for the duration segment)
-PS0='${_prompt_start:=$EPOCHREALTIME}'
+# PS0 stamps the time (in microseconds) just before the command runs,
+# for the duration segment above
+PS0='${_prompt_start:=${EPOCHREALTIME//./}}'
 PROMPT_COMMAND=__prompt_command
 
 # }}}
