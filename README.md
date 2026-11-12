@@ -8,7 +8,7 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 - Stow is a symlink farm manager which takes distinct packages of software and/or data located in separate directories on the filesystem, and makes them appear to be installed in the same place
 
 ```
-$ dnf install -y stow pcre-tools vim tmux
+$ dnf install -y stow vim tmux
 $ mkdir ~/git
 $ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
@@ -28,7 +28,7 @@ $ stow -t ~ *
 ### Packages
 
 ```
-# dnf install codium vim pcre-tools stow tmux gnome-tweak-tool tilix toolbox podman podman-docker podman-compose pavucontrol
+# dnf install codium vim stow tmux gnome-tweaks toolbox podman podman-compose pavucontrol
 ```
 
 ### Flatpak
