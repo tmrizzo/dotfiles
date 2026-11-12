@@ -1,16 +1,37 @@
 [user]
 	name = tmrizzo
 	email = tiagomdrizzo@gmail.com
+	signingkey = ~/.ssh/id_ed25519.pub
+	# Work identity for Red Hat repos — kept out of this public repo in
+	# ~/.gitconfig-work (gitignored), enable when needed:
+	#[includeIf "gitdir:~/git/work/"]
+	#	path = ~/.gitconfig-work
 [core]
 	autocrlf = input
 	editor = vim
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab
 	excludesfile = ~/.gitignore_global
+	# Performance on large repos
+	untrackedCache = true
+	fsmonitor = true
+[init]
+	defaultBranch = main
 [alias]
 	co = checkout
 	ci = commit
 	st = status
 	br = branch
+	# safety: the force push you should use
+	pushf = push --force-with-lease
+	# quick fixes
+	amend = commit --amend --no-edit
+	unstage = restore --staged
+	undo = reset --soft HEAD~1
+	last = log -1 HEAD --stat
+	# list aliases
+	aliases = config --get-regexp ^alias
+	# delete local branches already merged (and gone) on the remote
+	gone = !git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d
 	plog1 = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 	plog2 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 	plog3 = log --color --pretty=format:'%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)' --relative-date --decorate
@@ -28,14 +49,60 @@
 	status = auto
 [merge]
 	tool = vimdiff
+	# 3-way conflicts show the common ancestor
+	conflictstyle = zdiff3
 [diff]
 	tool = vimdiff
+	# smarter hunk selection and moved-block highlighting
+	algorithm = histogram
+	colorMoved = default
+[log]
+	date = relative
 [push]
 	default = current
+	# 'git push' just works on new branches
+	autoSetupRemote = true
+	# refuse force-pushes that would drop unseen upstream commits
+	useForceIfIncludes = true
+[pull]
+	rebase = true
+[rebase]
+	autosquash = true
+	autoStash = true
+	updateRefs = true
+[rerere]
+	# remember and auto-replay conflict resolutions
+	enabled = true
+[fetch]
+	prune = true
+	fsckobjects = true
+[transfer]
+	# verify object integrity during transfer
+	fsckobjects = true
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
 [credential]
 	helper = cache
-[apply]
-	whitespace = nowarn
+	# Persistent encrypted storage on GNOME:
+	#   dnf install git-credential-libsecret
+	#   git config --global credential.helper libsecret
+# --- SSH authentication and signing (requires a GitHub-registered key) ---
+# Your id_ed25519 is registered with Red Hat GitLab only, not GitHub
+# (verified: github.com/tmrizzo.keys is empty). To activate:
+# 1. Add the key at https://github.com/settings/keys
+# 2. Uncomment the blocks below
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
+[commit]
+	# requires the key above to be registered as a *signing* key on GitHub,
+	# otherwise commits will show as "Unverified" (and gpgsign fails)
+	gpgsign = false
+[tag]
+	gpgsign = false
+[gpg]
+	format = ssh
 [color "branch"]
 	current = yellow reverse
 	local = yellow
