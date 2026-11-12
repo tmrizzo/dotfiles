@@ -41,6 +41,10 @@ shopt -s autocd
 shopt -s globstar
 # A bare Tab on an empty line does not try to complete everything
 shopt -s no_empty_cmd_completion
+# Store multiline commands with real newlines in history
+shopt -s lithist
+# Programmable completion also works on aliases
+shopt -s progcomp_alias
 
 shopt -s checkwinsize
 
@@ -85,6 +89,8 @@ export PAGER=less
 
 # Use less pager with these options
 export LESS='-RSJMsi'
+# Stop less from creating its ~/.lesshst history file
+export LESSHISTFILE=-
 
 # less Colors for man Pages
 # Set colors when using gnome-terminal and terminator
@@ -136,6 +142,9 @@ export HISTFILESIZE=1000000
 export HISTSIZE=1000000
 
 # Let the terminal / multiplexer set TERM; do not force xterm-256color.
+
+# Correct TTY for pinentry (gpg and ssh-agent prompts)
+GPG_TTY=$(tty 2>/dev/null) && export GPG_TTY
 
 # Aliases
 [[ -f "${HOME}/.bashrc.d/bash_aliases" ]] && . "${HOME}/.bashrc.d/bash_aliases"

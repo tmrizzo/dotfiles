@@ -1,3 +1,6 @@
 *.swp
 *.swo
 __pycache__/
+*.orig
+.directory
+.DS_Store

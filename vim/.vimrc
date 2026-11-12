@@ -97,7 +97,14 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 if exists("&undodir")
     set undodir=~/.vim/undo
+    set undofile                          " persistent undo across sessions
 endif
+
+" Ask for confirmation instead of failing on :q with unsaved changes
+set confirm
+
+" Better command-line completion
+set wildmode=longest:full,full
 
 " Enable mouse just for visual selection mode
 "if has('mouse')

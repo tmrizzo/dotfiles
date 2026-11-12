@@ -84,6 +84,21 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# QoL options (parity with the bash package)
+setopt auto_cd          # type a directory name alone to cd into it
+setopt correct          # command typo correction
+export LESSHISTFILE=-   # stop less from creating ~/.lesshst
+
+# Use the 256-color dircolors scheme when the terminal supports it,
+# with the same dark-terminal brightening as the bash package
+if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]; then
+	eval "$(dircolors -b "${HOME}/.bashrc.d/dircolors.256dark")"
+	LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=01;38;5;75"
+	LS_COLORS="${LS_COLORS//00;38;5;244/00;38;5;250}"
+	LS_COLORS="${LS_COLORS//01;38;5;245/01;38;5;254}"
+	export LS_COLORS
+fi
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
