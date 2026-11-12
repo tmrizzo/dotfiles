@@ -1,9 +1,8 @@
 [global_config]
   always_split_with_profile = True
-  enabled_plugins = TerminalShot, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  enabled_plugins = TerminalShot
   extra_styling = False
   focus = mouse
-  title_hide_sizetext = True
   title_inactive_bg_color = "#000000"
 [keybindings]
   split_horiz = <Alt>minus
@@ -17,21 +16,18 @@
   [[default]]
     [[[child0]]]
       fullscreen = False
-      last_active_term = 1657de02-0204-450f-a90e-fdc17a9a146d
       last_active_window = True
       maximised = False
       order = 0
       parent = ""
       position = 0:43
       size = 1600, 857
-      title = /bin/bash
       type = Window
     [[[terminal1]]]
       order = 0
       parent = child0
       profile = Molokai
       type = Terminal
-      uuid = 1657de02-0204-450f-a90e-fdc17a9a146d
 [plugins]
 [profiles]
   [[default]]
