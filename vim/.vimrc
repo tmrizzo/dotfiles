@@ -26,7 +26,6 @@ set matchpairs+=<:>                    " specially for html
 set title                              " show file in titlebar
 set listchars=tab:»⋅,trail:⋅,nbsp:⋅    " Better mark chars for list mode
 "set showbreak=¬                        " show line breaks
-set t_Co=256                           " Set vim to use 256 colors
 set encoding=utf-8 nobomb              " UTF-8 characters set
 set shortmess=atI                      " Disable vim intro message
 "set colorcolumn=80                     " Mark the right margin at column 80
@@ -65,12 +64,8 @@ set autoindent
 set smartindent
 set smarttab
 
-" Don't add empty newlines at the end of files
-set binary
-set noeol
-
-" Toggle auto-indenting for code paste
-set paste
+" Toggle auto-indenting for code paste with <leader>p (do not leave
+" 'paste' set permanently: it disables autoindent and abbreviations)
 
 " UNIX format for end of lines
 set fileformat=unix                    " file mode is unix
@@ -82,7 +77,6 @@ set magic                              " change the way backslashes are used in 
 "set incsearch                          " Do incremental searching
 
 "set lazyredraw                         " redraw only when we need to
-set esckeys                            " Allow cursor keys in insert mode
 set backspace=indent,eol,start         " Allow backspacing over everything in insert mode
 set ttyfast                            " Optimize for fast terminal connections
 set history=2000                       " Keep 2000 lines of command line history
@@ -165,9 +159,8 @@ noremap <c-a> ggVG
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-    " Reload configuration upon saving (from vimbits.com)
-    autocmd! BufWritePost .vimrc source %
-    autocmd! BufWritePost vimrc source %
+    " Reload configuration upon saving
+    autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
     " Enable file type automatic detection.
     filetype plugin indent on
