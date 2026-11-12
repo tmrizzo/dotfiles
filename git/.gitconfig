@@ -1,7 +1,7 @@
 [user]
 	name = tmrizzo
 	email = tiagomdrizzo@gmail.com
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519_github.pub
 	# Work identity for Red Hat repos — kept out of this public repo in
 	# ~/.gitconfig-work (gitignored), enable when needed:
 	#[includeIf "gitdir:~/git/work/"]
@@ -88,19 +88,15 @@
 	# Persistent encrypted storage on GNOME:
 	#   dnf install git-credential-libsecret
 	#   git config --global credential.helper libsecret
-# --- SSH authentication and signing (requires a GitHub-registered key) ---
-# Your id_ed25519 is registered with Red Hat GitLab only, not GitHub
-# (verified: github.com/tmrizzo.keys is empty). To activate:
-# 1. Add the key at https://github.com/settings/keys
-# 2. Uncomment the blocks below
-#[url "git@github.com:"]
-#	insteadOf = https://github.com/
+# --- SSH authentication and signing via the dedicated GitHub key ---
+# Key: ~/.ssh/id_ed25519_github (see ~/.ssh/config)
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 [commit]
-	# requires the key above to be registered as a *signing* key on GitHub,
-	# otherwise commits will show as "Unverified" (and gpgsign fails)
-	gpgsign = false
+	# shows "Verified" on GitHub once the key is registered as a signing key
+	gpgsign = true
 [tag]
-	gpgsign = false
+	gpgsign = true
 [gpg]
 	format = ssh
 [color "branch"]
