@@ -4,7 +4,7 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 
 ### Packages
 
-Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`, `curl`.
+Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`, `curl`, `flatpak`, `systemd`.
 
 **Required** — used directly by the configurations:
 

@@ -1,0 +1,6 @@
+[Unit]
+Description=Remove unused Flatpak runtimes
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flatpak uninstall --unused --noninteractive

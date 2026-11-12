@@ -1,0 +1,5 @@
+# Flatpak global overrides — apply to every Flatpak app
+# (per-app overrides live alongside this file)
+
+[Environment]
+GTK_THEME=Adwaita:dark

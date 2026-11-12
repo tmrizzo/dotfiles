@@ -87,6 +87,9 @@ export EDITOR=vim
 # Make less the default pager
 export PAGER=less
 
+# Syntax-highlighted man pages via bat (when installed)
+command -v bat >/dev/null 2>&1 && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Use less pager with these options
 export LESS='-RSJMsi'
 # Stop less from creating its ~/.lesshst history file

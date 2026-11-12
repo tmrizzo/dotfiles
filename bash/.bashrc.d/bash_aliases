@@ -111,6 +111,15 @@ alias path='echo -e ${PATH//:/\\n}'
 # Public IP address
 alias myip='curl -s ifconfig.me'
 
+# systemd / journal
+alias jctl='journalctl -p 3 -xb'                    # this boot's errors
+alias juser='journalctl --user -b'                  # user unit logs
+alias boottime='systemd-analyze blame | head -15'   # slowest boot services
+
+# toolbox
+alias tb='toolbox enter'
+alias tbc='toolbox create'
+
 # Modern replacements — only active when the tool is installed
 # Install: dnf install bat fd-find ripgrep
 command -v bat >/dev/null 2>&1 && alias cat='bat -pp'

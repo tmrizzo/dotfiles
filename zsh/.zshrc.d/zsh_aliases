@@ -110,6 +110,15 @@ alias path='echo -e ${PATH//:/\\n}'
 # Public IP address
 alias myip='curl -s ifconfig.me'
 
+# systemd / journal
+alias jctl='journalctl -p 3 -xb'                    # this boot's errors
+alias juser='journalctl --user -b'                  # user unit logs
+alias boottime='systemd-analyze blame | head -15'   # slowest boot services
+
+# toolbox
+alias tb='toolbox enter'
+alias tbc='toolbox create'
+
 # Detect the running distribution (see man os-release)
 OSCODENAME=""
 if [ -r /etc/os-release ]; then
