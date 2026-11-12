@@ -4,7 +4,7 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 
 ### Packages
 
-Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`.
+Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`.
 
 **Required** — used directly by the configurations:
 
@@ -52,7 +52,7 @@ Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fo
 $ mkdir ~/git
 $ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
-$ stow -t ~ bash git tmux vim fontconfig gtk terminator zsh
+$ stow -t ~ bash git tmux vim fontconfig gtk terminator zsh konsole
 ```
 
 - The `stow -t DIR` sets the target directory to `DIR` instead of the parent of the stow directory, i.e `~` is the home directory.
