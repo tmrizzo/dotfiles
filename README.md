@@ -4,18 +4,44 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 
 ### Packages
 
-Managed packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`.
+Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`.
+
+**Required** — used directly by the configurations:
 
 ```
-# dnf install codium vim stow tmux gnome-tweaks toolbox podman podman-compose pavucontrol
+# dnf install stow git vim tmux terminator zsh bash-completion \
+    fontconfig gnome-tweaks curl libnotify
 ```
 
-Optional tools used by the bash configuration (features activate automatically when the
-tool is present):
+- `stow` — installs/symlinks the dotfiles
+- `bash-completion` — sourced by `~/.bashrc`
+- `fontconfig` — `fc-cache` for the font setup
+- `libnotify` — `notify-send`, used by the `timer` shell function
+- `zsh` — only if you use the `zsh` package (also needs [oh-my-zsh](https://ohmyz.sh/): `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`)
+
+**Optional** — features activate automatically when the tool is present:
 
 ```
-# dnf install fzf zoxide bat fd-find ripgrep yt-dlp
+# dnf install fzf zoxide bat fd-find ripgrep yt-dlp git-credential-libsecret
 ```
+
+- `fzf` — fuzzy `Ctrl-R` history and `Alt-C` directory jump (`~/.bashrc`)
+- `zoxide` — smarter `cd` (`z dotf`, `~/.bashrc`)
+- `bat` / `fd-find` / `ripgrep` — modern `cat` / `find` / `grep`; related aliases
+  switch over automatically (`~/.bashrc.d/bash_aliases`)
+- `yt-dlp` — used by the `getmp3` alias
+- `git-credential-libsecret` — persistent encrypted git credentials
+  (enable with `git config --global credential.helper libsecret`; the
+  default is the in-memory `cache` helper)
+
+**Optional** — used by specific aliases/functions only:
+
+```
+# dnf install unzip p7zip p7zip-plugins unrar minikube podman toolbox
+```
+
+- archive tools for the `ex` extractor function (`unzip`, `p7zip*`, `unrar`)
+- `minikube` — completion shipped in `bash/.bash_completion/`
 
 ### Installation
 
@@ -23,7 +49,6 @@ tool is present):
 - Stow is a symlink farm manager which takes distinct packages of software and/or data located in separate directories on the filesystem, and makes them appear to be installed in the same place
 
 ```
-$ dnf install -y stow vim tmux
 $ mkdir ~/git
 $ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
