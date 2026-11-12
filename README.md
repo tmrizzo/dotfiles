@@ -53,7 +53,7 @@ Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fo
 $ mkdir ~/git
 $ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
-$ stow -t ~ bash git tmux vim fontconfig gtk terminator zsh konsole
+$ stow -t ~ bash curl flatpak fontconfig git gtk konsole systemd terminator tmux vim zsh
 ```
 
 - The `stow -t DIR` sets the target directory to `DIR` instead of the parent of the stow directory, i.e `~` is the home directory.
