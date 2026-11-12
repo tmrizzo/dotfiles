@@ -47,6 +47,10 @@ shopt -s checkwinsize
 # Use the 256-color dircolors scheme when the terminal supports it
 if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]; then
 	eval "$(dircolors -b "${HOME}/.bashrc.d/dircolors.256dark")"
+	# The scheme's di=38;5;33 (dark blue) is hard to read on dark terminals;
+	# use a brighter blue for directories instead
+	LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=01;38;5;75"
+	export LS_COLORS
 fi
 
 # These completion tuning parameters change the default behavior of bash_completion:
