@@ -1,70 +1,94 @@
 #!/usr/bin/env bash
 # vim:fdm=marker
 # PROMPT {{{
-__prompt_command(){
-# This needs to be first
-local EXIT="$?"
-PROMPT_DIRTRIM=2
+__prompt_command() {
+	local EXIT="$?"
+	PROMPT_DIRTRIM=3
 
-# Colors
-local RESET='\[\e[0m\]'
-local RED='\[\e[1;31m\]'
-local GREEN='\[\e[1;32m\]'
-local BLUE='\[\e[1;34m\]'
-local PURPLE='\[\e[1;35m\]'
+	# --- duration of the last command (bash >= 5, no forks) --------------
+	local dur=""
+	if [[ -n ${_prompt_start:-} ]]; then
+		local d
+		d=$(bc <<< "${EPOCHREALTIME} - ${_prompt_start}" 2>/dev/null)
+		(( ${d%%.*} > 2 )) && dur=" ${d%.*}s"
+	fi
+	_prompt_start=""
 
-PS1="" # start prompt as blank
+	# --- colors -----------------------------------------------------------
+	local RESET='\[\e[0m\]'  RED='\[\e[1;31m\]'  GREEN='\[\e[1;32m\]'
+	local BLUE='\[\e[1;34m\]' PURPLE='\[\e[1;35m\]' CYAN='\[\e[1;36m\]'
+	local YELLOW='\[\e[1;33m\]' GREY='\[\e[0;90m\]'
 
-# exit status check
-if [[ $EXIT -ne 0 ]]; then
-        # red if exit status is non-zero
-        PS1+="${RED}[\w]${RESET}"
-else
-        PS1+="${GREEN}[\w]${RESET}"
-fi
+	# --- environment: container / venv / root / remote --------------------
+	local env_prefix="" in_container="" user_part=""
+	if [[ -f /run/.containerenv || -f /.dockerenv ]]; then
+		in_container=1
+		if [[ -f /run/.toolboxenv ]]; then
+			env_prefix="${YELLOW}⬢ toolbox${RESET} "
+		elif grep -q '^image=' /run/.containerenv 2>/dev/null; then
+			env_prefix="${YELLOW}⬢ podman${RESET} "
+		else
+			env_prefix="${YELLOW}⬢ container${RESET} "
+		fi
+	fi
+	[[ -n ${VIRTUAL_ENV:-} ]] && env_prefix+="${CYAN}(${VIRTUAL_ENV##*/})${RESET} "
+	# host context only when it is not obvious (own laptop stays clean)
+	if [[ $UID -eq 0 || -n ${SSH_CLIENT:-}${SSH_TTY:-} || $in_container -eq 1 ]]; then
+		user_part="${GREY}\u@\h ${RESET}"
+	fi
 
-# for toolbox container environment
-if [ -f /run/.containerenv ] && [ -f /run/.toolboxenv ]; then
-     PS1="" # start prompt as blank
-     if [[ $EXIT -ne 0 ]]; then
-            PS1+="${RED}⬢ ${RED}[@\h \w]${RESET}"
-     else
-            PS1+="${RED}⬢ ${GREEN}[@\h \w]${RESET}"
-     fi
-fi
+	# --- git (single subprocess for everything) ---------------------------
+	local git_part=""
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		local st branch dirty
+		st=$(git status --porcelain=v2 --branch 2>/dev/null)
+		branch=$(awk '/^# branch.head /{print $3}' <<< "$st")
+		if [[ $branch == '(detached)' ]]; then
+			branch=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
+		fi
+		dirty=$(grep -c '^[123?u!]' <<< "$st")
+		(( dirty > 0 )) && branch+=" ${RED}+${dirty}${PURPLE}"
+		local ahead behind
+		ahead=$(awk '/^# branch.ab /{print "+"$3}' <<< "$st")
+		behind=$(awk '/^# branch.ab /{print $4}' <<< "$st")
+		[[ -n $ahead || -n $behind ]] && branch+=" ${YELLOW}${ahead}${behind}${RESET}${PURPLE}"
+		# in-progress operations: merge/rebase/cherry-pick
+		local state gdir
+		gdir=$(git rev-parse --git-dir 2>/dev/null)
+		for f in rebase-merge rebase-apply MERGE_HEAD CHERRY_PICK_HEAD; do
+			[[ -e $gdir/$f ]] && { state="${f%%_*}"; break; }
+		done
+		[[ -n $state ]] && branch+="|${YELLOW}${state}${RESET}${PURPLE}"
+		git_part=" ${PURPLE}(${branch}${RESET}${PURPLE})${RESET}"
+	fi
 
-# git directory check
-if git rev-parse --git-dir &>/dev/null; then
-        # check if HEAD is detached from branch
-        BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null \
-                || git describe --tags --exact-match 2>/dev/null \
-                || git rev-parse --short HEAD)
+	# --- status tail: exit code, duration, jobs ----------------------------
+	local tail=""
+	(( EXIT != 0 )) && tail+=" ${RED}✗ ${EXIT}${RESET}"
+	tail+="${dur}"
+	local jobs_n
+	jobs_n=$(jobs -p | wc -l)
+	(( jobs_n > 0 )) && tail+=" ${CYAN}&${jobs_n}${RESET}"
 
-        # check how many uncommitted changes
-        DIRTY=$(git status --porcelain --ignore-submodules=dirty | wc -l)
-        if (( DIRTY > 0 )); then
-                STATUS="${RESET}+${RED}${DIRTY}${PURPLE}"
-        else
-                STATUS=""
-        fi
+	# --- assemble -----------------------------------------------------------
+	local path_color=$GREEN
+	(( EXIT != 0 )) && path_color=$RED
+	local sym='$'
+	(( UID == 0 )) && sym='#'
+	PS1="${env_prefix}${user_part}${path_color}\w${RESET}${git_part}${tail}${BLUE}\n${sym}> ${RESET}"
 
-        PS1+="${PURPLE} (${BRANCH}${STATUS})${RESET}"
-else
-        PS1+=""
-fi
+	# Append this command to the on-disk history and pick up history written
+	# by other sessions (do not overwrite PROMPT_COMMAND elsewhere)
+	history -a
+	history -n
 
-PS1+="${BLUE}\n> ${RESET}"
-
-# Append this command to the on-disk history and pick up history written by
-# other sessions (do not overwrite PROMPT_COMMAND elsewhere)
-history -a
-history -n
-
-# Terminal title: user@host:cwd (works in terminator/tmux)
-printf '\033]0;%s@%s:%s\007' "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"
+	# Terminal title: user@host:cwd (works in terminator/konsole/tmux)
+	printf '\033]0;%s%s:%s\007' "${in_container:+⬢ }" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"
 
 }
+
+# PS0 stamps the time just before the command runs (for the duration segment)
+PS0='${_prompt_start:=$EPOCHREALTIME}'
 PROMPT_COMMAND=__prompt_command
 
 # }}}
-
