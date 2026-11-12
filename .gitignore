@@ -6,3 +6,7 @@
 /gtk/.config/gtk-4.0/servers
 /gtk/.config/gtk-4.0/bookmarks
 weechat/*
+
+# Local secrets / machine tokens (never commit)
+/bash/.bashrc.d/*.vars
+
