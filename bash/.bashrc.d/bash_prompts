@@ -10,7 +10,9 @@ __prompt_command() {
 	if [[ -n ${_prompt_start:-} ]]; then
 		local d
 		d=$(bc <<< "${EPOCHREALTIME} - ${_prompt_start}" 2>/dev/null)
-		(( ${d%%.*} > 2 )) && dur=" ${d%.*}s"
+		if [[ -n $d ]] && (( ${d%%.*} > 2 )); then
+			dur=" ${d%.*}s"
+		fi
 	fi
 	_prompt_start=""
 
@@ -46,6 +48,10 @@ __prompt_command() {
 		if [[ $branch == '(detached)' ]]; then
 			branch=$(git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD)
 		fi
+		# Prompt-injection guard: git output is untrusted (a crafted branch
+		# name like 'evil$(cmd)' would execute at prompt-render time).
+		# Strip control chars and the PS1 expansion metacharacters $ ` \
+		branch=$(printf '%s' "$branch" | tr -d '\001-\037\177\044\140\134')
 		dirty=$(grep -c '^[123?u!]' <<< "$st")
 		(( dirty > 0 )) && branch+=" ${RED}+${dirty}${PURPLE}"
 		local ahead behind
