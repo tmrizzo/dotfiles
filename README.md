@@ -66,14 +66,29 @@ After installing tealdeer, fetch the sheet cache once with `tldr --update`.
 
 - Use [GNU Stow](https://www.gnu.org/software/stow/) to manage dotfiles.
 - Stow is a symlink farm manager which takes distinct packages of software and/or data located in separate directories on the filesystem, and makes them appear to be installed in the same place
-- An `install.sh` script automates it: `./install.sh` stows every package (new packages are picked up automatically — no list to maintain), checks the basic requirements and refreshes the font cache. Safe to re-run at any time
-- Prefer manual stow? `stow -t ~ --restow */` is all the script does
+- `install.sh` automates a new-system setup:
 
 ```
 $ git clone https://github.com/tmrizzo/dotfiles ~/git/dotfiles
 $ cd ~/git/dotfiles
-$ ./install.sh
+$ ./install.sh          # stow all packages + refresh caches (default)
 ```
+
+Options:
+
+```
+./install.sh --list             list packages and optional tools
+./install.sh --packages bash,vim  stow only these packages
+./install.sh --tools            install the optional CLI tool belt (dnf)
+./install.sh --secrets          create ~/.bashrc.d/secrets.vars from the example
+./install.sh --flatpak          add the Flathub remotes
+./install.sh --all              everything above
+./install.sh --dry-run          show what would be done
+```
+
+- Every directory in this repo is a stow package; new ones are picked up automatically — no list to maintain
+- Safe to re-run at any time (`--restow` is idempotent); missing requirements are installed via dnf on Fedora or reported on other distros
+- Prefer manual stow? `stow -t ~ --restow */` is all the script does
 
 ```
 $ mkdir ~/git
