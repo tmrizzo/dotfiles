@@ -11,6 +11,8 @@
 #   ./install.sh --all              everything above
 #   ./install.sh --dry-run          show what would be done
 #
+# Short flags: -h (--help), -l (--list), -n (--dry-run)
+#
 # Every directory in this repo is a stow package; new ones are picked up
 # automatically. Safe to re-run at any time.
 
@@ -24,6 +26,9 @@ cd "$(dirname "$0")"
 PACKAGES_ALL=(*/)
 PACKAGES_ALL=("${PACKAGES_ALL[@]%/}")
 
+# Only the tools install.sh itself needs to run. The README's "Required"
+# list covers everything the *configs* use (terminator, zsh, fontconfig, ...)
+# and is a superset of this.
 REQUIRED_TOOLS=(stow git vim tmux)
 
 OPTIONAL_TOOLS=(
@@ -48,7 +53,7 @@ have() { command -v "$1" >/dev/null 2>&1; }
 
 is_fedora() { . /etc/os-release 2>/dev/null && [[ ${ID:-} == fedora ]]; }
 
-usage() { sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'; }
+usage() { sed -n '2,17p' "$0" | sed 's/^# \{0,1\}//'; }
 
 list_things() {
 	echo "Packages (stow):"
@@ -167,8 +172,8 @@ if (( DO_FLATPAK )); then
 	if have flatpak; then
 		echo "==> Adding Flatpak remotes"
 		for remote in "${FLATPAK_REMOTES[@]}"; do
-			set -- $remote
-			run flatpak remote-add --if-not-exists "$1" "$2"
+			read -r name url <<< "$remote"
+			run flatpak remote-add --if-not-exists "$name" "$url"
 		done
 	else
 		echo "==> flatpak not installed; skipping remotes (dnf install flatpak)"
