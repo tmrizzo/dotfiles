@@ -130,7 +130,7 @@ esac
 # Claude Code (Vertex) environment, if installed
 [[ -f "${HOME}/.config/claude-code-vertex/env.sh" ]] && . "${HOME}/.config/claude-code-vertex/env.sh"
 
-# PATH / MANPATH / INFOPATH (after brew so user bins win)
+# PATH / MANPATH / INFOPATH (single source of truth: bash_path)
 [[ -f "${HOME}/.bashrc.d/bash_path" ]] && . "${HOME}/.bashrc.d/bash_path"
 
 # zoxide: smarter cd with history (z dotf)
