@@ -49,7 +49,7 @@ packages (config included); the rest are config-free and work out of the box:
 | `duf` / `dust` | modern `df` / `du` | guarded aliases: `df`→`duf`, `du`→`dust` when installed |
 | `jq` / `yq` | JSON / YAML wrangling | no config needed |
 | `mtr` | traceroute + ping live | no config needed |
-| `just` | command runner | `justfile` in this repo — see below |
+| `just` | command runner | no shared config — per-project `justfile`s |
 
 After installing tealdeer, fetch the sheet cache once with `tldr --update`.
 
@@ -89,14 +89,6 @@ Options:
 - Every directory in this repo is a stow package; new ones are picked up automatically — no list to maintain
 - Safe to re-run at any time (`--restow` is idempotent); missing requirements are installed via dnf on Fedora or reported on other distros
 - Prefer manual stow? `stow -t ~ --restow */` is all the script does
-
-```
-$ mkdir ~/git
-$ git clone https://github.com/tmrizzo/dotfiles
-$ cd ~/git/dotfiles
-$ ./install.sh
-```
-
 - The `stow -t DIR` sets the target directory to `DIR` instead of the parent of the stow directory, i.e `~` is the home directory.
 
 - You also have the option to install only the dotfile you want, like so:
