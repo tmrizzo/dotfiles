@@ -4,7 +4,7 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 
 ### Packages
 
-Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`, `curl`, `flatpak`, `systemd`, `btop`, `lazygit`, `tealdeer`.
+Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`, `curl`, `flatpak`, `systemd`, `btop`, `lazygit`, `tealdeer`, `tldr`.
 
 **Required** — used directly by the configurations:
 
@@ -46,6 +46,10 @@ packages (config included); the rest are config-free and work out of the box:
 | `btop` | resource monitor | `btop/.config/btop/btop.conf` — monokai theme, vim keys |
 | `lazygit` | git TUI | `lazygit/.config/lazygit/config.yml` — monokai colors, vim editor |
 | `tealdeer` | `tldr` cheat sheets | `tealdeer/.config/tealdeer/config.toml` — pager, weekly auto-update |
+| `tldr` | official Python tldr client | `tldr/.config/environment.d/tldr.conf` — cache/env settings (no config file; `TLDR_*` vars) |
+
+`tealdeer` and `tldr` are alternative clients for the same pages and both
+provide the `tldr` command — install one or the other, not both.
 | `duf` / `dust` | modern `df` / `du` | guarded aliases: `df`→`duf`, `du`→`dust` when installed |
 | `jq` / `yq` | JSON / YAML wrangling | no config needed |
 | `mtr` | traceroute + ping live | no config needed |
