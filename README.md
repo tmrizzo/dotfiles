@@ -66,13 +66,20 @@ After installing tealdeer, fetch the sheet cache once with `tldr --update`.
 
 - Use [GNU Stow](https://www.gnu.org/software/stow/) to manage dotfiles.
 - Stow is a symlink farm manager which takes distinct packages of software and/or data located in separate directories on the filesystem, and makes them appear to be installed in the same place
-- A `Makefile` and a `justfile` automate it: `make check` / `just check` (verify tools), `make install` / `just install` (stow everything + font cache), `make restow` / `just restow` (refresh symlinks). The justfile adds `just update` (pull + restow) and `just lint` (shellcheck)
+- An `install.sh` script automates it: `./install.sh` stows every package (new packages are picked up automatically — no list to maintain), checks the basic requirements and refreshes the font cache. Safe to re-run at any time
+- Prefer manual stow? `stow -t ~ --restow */` is all the script does
+
+```
+$ git clone https://github.com/tmrizzo/dotfiles ~/git/dotfiles
+$ cd ~/git/dotfiles
+$ ./install.sh
+```
 
 ```
 $ mkdir ~/git
 $ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
-$ stow -t ~ bash btop curl flatpak fontconfig git gtk konsole lazygit systemd tealdeer terminator tmux vim zsh
+$ ./install.sh
 ```
 
 - The `stow -t DIR` sets the target directory to `DIR` instead of the parent of the stow directory, i.e `~` is the home directory.
@@ -83,10 +90,7 @@ $ stow -t ~ bash btop curl flatpak fontconfig git gtk konsole lazygit systemd te
 # stow -t ~ vim
 ```
 
-- After adding new package files (e.g. a new `bash/.inputrc`), re-run stow to pick them up:
-```
-# stow -t ~ --restow bash
-```
+- After adding new package files (e.g. a new `bash/.inputrc`), just re-run `./install.sh`.
 
 - Don't want to use Stow? Symlink it manually.
 

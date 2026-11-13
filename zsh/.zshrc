@@ -163,6 +163,9 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Some people use a different file for aliases
 [[ -f "$HOME/.zshrc.d/zsh_aliases" ]] && . "$HOME/.zshrc.d/zsh_aliases"
 
+# Claude Code (Vertex) environment, if installed
+[[ -f "${HOME}/.config/claude-code-vertex/env.sh" ]] && . "${HOME}/.config/claude-code-vertex/env.sh"
+
 # Functions
 #
 # Some people use a different file for functions

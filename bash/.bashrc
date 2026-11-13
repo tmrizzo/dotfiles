@@ -161,6 +161,9 @@ GPG_TTY=$(tty 2>/dev/null) && export GPG_TTY
 # Local env / secrets (gitignored) — brew shellenv lives here
 [[ -f "${HOME}/.bashrc.d/secrets.vars" ]] && . "${HOME}/.bashrc.d/secrets.vars"
 
+# Claude Code (Vertex) environment, if installed
+[[ -f "${HOME}/.config/claude-code-vertex/env.sh" ]] && . "${HOME}/.config/claude-code-vertex/env.sh"
+
 # PATH / MANPATH / INFOPATH (after brew so user bins win)
 [[ -f "${HOME}/.bashrc.d/bash_path" ]] && . "${HOME}/.bashrc.d/bash_path"
 
