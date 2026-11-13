@@ -1,0 +1,12 @@
+# tealdeer (tldr client) configuration
+# Docs: https://github.com/tealdeer-rs/tealdeer/blob/main/config.toml
+
+[display]
+# Compact, colorized output; page long sheets
+compact = false
+use_pager = true
+
+[updates]
+# Auto-refresh the cache weekly
+auto_update = true
+auto_update_interval_hours = 168

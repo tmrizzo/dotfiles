@@ -3,7 +3,7 @@
 # make install  stow all packages into ~ and refresh the font cache
 # make restow   re-create symlinks after adding files to a package
 
-PACKAGES := bash curl flatpak fontconfig git gtk konsole systemd terminator tmux vim zsh
+PACKAGES := bash btop curl flatpak fontconfig git gtk konsole lazygit systemd tealdeer terminator tmux vim zsh
 
 .PHONY: check install restow
 

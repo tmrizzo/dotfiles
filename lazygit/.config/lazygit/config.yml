@@ -1,0 +1,36 @@
+# lazygit configuration
+# Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  # Monokai-inspired colors to match the terminal/vim scheme
+  theme:
+    activeBorderColor:
+      - "#66D9EF"
+      - bold
+    inactiveBorderColor:
+      - "#75715E"
+    searchingActiveBorderColor:
+      - "#F92672"
+      - bold
+    optionsTextColor:
+      - "#66D9EF"
+    selectedLineBgColor:
+      - "#49483E"
+    selectedRangeBgColor:
+      - "#49483E"
+  border: rounded
+  showRandomTip: false
+
+git:
+  paging:
+    colorArg: always
+  autoFetch: true
+  branchLogCmd: "git lg1"
+
+os:
+  editCommand: vim
+  editAtLine: vim
+
+refactor:
+  # jump-to-next-conflict helpers
+  jumpToNextConflict: true

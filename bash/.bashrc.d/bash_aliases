@@ -121,10 +121,12 @@ alias tb='toolbox enter'
 alias tbc='toolbox create'
 
 # Modern replacements — only active when the tool is installed
-# Install: dnf install bat fd-find ripgrep
+# Install: dnf install bat fd-find ripgrep duf dust
 command -v bat >/dev/null 2>&1 && alias cat='bat -pp'
 command -v fd  >/dev/null 2>&1 && alias fihe='fd -i' && alias fif='fd -t f -i' && alias fid='fd -t d -i'
 command -v rg  >/dev/null 2>&1 && alias cgrep='rg -v "^\s*(#|;|$)"'
+command -v duf  >/dev/null 2>&1 && alias df='duf'
+command -v dust >/dev/null 2>&1 && alias du='dust'
 
 # Detect the running distribution (see man os-release)
 OSCODENAME=""

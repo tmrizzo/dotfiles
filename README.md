@@ -4,7 +4,7 @@ This is my dotfiles collection, a set of configuration files I use to customize 
 
 ### Packages
 
-Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`, `curl`, `flatpak`, `systemd`.
+Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`, `konsole`, `curl`, `flatpak`, `systemd`, `btop`, `lazygit`, `tealdeer`.
 
 **Required** — used directly by the configurations:
 
@@ -34,6 +34,25 @@ Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fo
   (enable with `git config --global credential.helper libsecret`; the
   default is the in-memory `cache` helper)
 
+**CLI tool belt** — `btop`, `lazygit` and `tealdeer` have dedicated stow
+packages (config included); the rest are config-free and work out of the box:
+
+```
+# dnf install btop lazygit tealdeer duf dust jq yq mtr just
+```
+
+| Tool | Purpose | Configuration |
+|---|---|---|
+| `btop` | resource monitor | `btop/.config/btop/btop.conf` — monokai theme, vim keys |
+| `lazygit` | git TUI | `lazygit/.config/lazygit/config.yml` — monokai colors, vim editor |
+| `tealdeer` | `tldr` cheat sheets | `tealdeer/.config/tealdeer/config.toml` — pager, weekly auto-update |
+| `duf` / `dust` | modern `df` / `du` | guarded aliases: `df`→`duf`, `du`→`dust` when installed |
+| `jq` / `yq` | JSON / YAML wrangling | no config needed |
+| `mtr` | traceroute + ping live | no config needed |
+| `just` | command runner | `justfile` in this repo — see below |
+
+After installing tealdeer, fetch the sheet cache once with `tldr --update`.
+
 **Optional** — used by specific aliases/functions only:
 
 ```
@@ -47,7 +66,7 @@ Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fo
 
 - Use [GNU Stow](https://www.gnu.org/software/stow/) to manage dotfiles.
 - Stow is a symlink farm manager which takes distinct packages of software and/or data located in separate directories on the filesystem, and makes them appear to be installed in the same place
-- A `Makefile` automates it: `make check` (verify tools), `make install` (stow everything + font cache), `make restow` (refresh symlinks)
+- A `Makefile` and a `justfile` automate it: `make check` / `just check` (verify tools), `make install` / `just install` (stow everything + font cache), `make restow` / `just restow` (refresh symlinks). The justfile adds `just update` (pull + restow) and `just lint` (shellcheck)
 
 ```
 $ mkdir ~/git

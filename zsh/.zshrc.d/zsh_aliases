@@ -110,6 +110,10 @@ alias path='echo -e ${PATH//:/\\n}'
 # Public IP address
 alias myip='curl -s ifconfig.me'
 
+# Modern replacements — only active when the tool is installed
+command -v duf  >/dev/null 2>&1 && alias df='duf'
+command -v dust >/dev/null 2>&1 && alias du='dust'
+
 # systemd / journal
 alias jctl='journalctl -p 3 -xb'                    # this boot's errors
 alias juser='journalctl --user -b'                  # user unit logs
