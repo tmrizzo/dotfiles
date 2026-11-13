@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # README
 # The ~/.profile is used by many shells as fallback. This is used by X11.
 # Wayland uses a different approach:

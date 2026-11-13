@@ -89,65 +89,13 @@ setopt auto_cd          # type a directory name alone to cd into it
 setopt correct          # command typo correction
 export LESSHISTFILE=-   # stop less from creating ~/.lesshst
 
-# Use the 256-color dircolors scheme when the terminal supports it,
-# with the same dark-terminal brightening as the bash package
-if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]; then
-	eval "$(dircolors -b "${HOME}/.bashrc.d/dircolors.256dark")"
-	LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=01;38;5;75"
-	LS_COLORS="${LS_COLORS//00;38;5;244/00;38;5;250}"
-	LS_COLORS="${LS_COLORS//01;38;5;245/01;38;5;254}"
-	export LS_COLORS
-fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Make vim standard editor
-export EDITOR=vim
-
-# Make less the default pager
-export PAGER=less
-
-# Syntax-highlighted man pages via bat (when installed)
-command -v bat >/dev/null 2>&1 && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-# Use less pager with these options
-export LESS='-RSJMsi'
-
-# less Colors for man Pages
-# Set colors when using gnome-terminal and terminator
-export GROFF_NO_SGR=1
-# Begin blinking
-#export LESS_TERMCAP_mb=$'\e[01;31m'
-export LESS_TERMCAP_mb=$'\e[1;32m'
-# Begin bold
-#export LESS_TERMCAP_md=$'\e[01;38;5;74m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-# End mode
-#export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_me=$'\e[0m'
-# End standout-mode
-#export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-# Begin standout-mode - info box
-#export LESS_TERMCAP_so=$'\e[38;5;246m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-# End underline
-#export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_ue=$'\e[0m'
-# Begin underline
-#export LESS_TERMCAP_us=$'\e[04;38;5;146m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+# Environment shared with the bash package: editor, pager, LESS* colors,
+# dircolors/LS_COLORS etc. (single source of truth in bash_env)
+[[ -f "${HOME}/.bashrc.d/bash_env" ]] && . "${HOME}/.bashrc.d/bash_env"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
