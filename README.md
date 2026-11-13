@@ -38,7 +38,7 @@ Managed dotfile packages: `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fo
 packages (config included); the rest are config-free and work out of the box:
 
 ```
-# dnf install btop lazygit tealdeer duf dust jq yq mtr just
+# dnf install btop lazygit tealdeer duf dust jq yq mtr just shellcheck
 ```
 
 | Tool | Purpose | Configuration |
@@ -50,6 +50,7 @@ packages (config included); the rest are config-free and work out of the box:
 | `jq` / `yq` | JSON / YAML wrangling | no config needed |
 | `mtr` | traceroute + ping live | no config needed |
 | `just` | command runner | no shared config — per-project `justfile`s |
+| `shellcheck` | shell script linter | no config needed; used to validate `install.sh` |
 
 After installing tealdeer, fetch the sheet cache once with `tldr --update`.
 

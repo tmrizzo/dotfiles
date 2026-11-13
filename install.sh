@@ -68,7 +68,14 @@ while [ $# -gt 0 ]; do
 		-h|--help)    usage; exit 0 ;;
 		-l|--list)    list_things; exit 0 ;;
 		-n|--dry-run) DRY_RUN=1 ;;
-		--packages)   shift; IFS=',' read -ra SELECTED <<< "${1:-}"; DO_STOW=1 ;;
+		--packages)
+			if [ $# -lt 2 ] || [ -z "${2:-}" ]; then
+				echo "--packages: no package names given (see --list)" >&2
+				exit 2
+			fi
+			IFS=',' read -ra SELECTED <<< "$2"
+			shift
+			DO_STOW=1 ;;
 		--tools)      DO_TOOLS=1 ;;
 		--secrets)    DO_SECRETS=1 ;;
 		--flatpak)    DO_FLATPAK=1 ;;
@@ -77,6 +84,20 @@ while [ $# -gt 0 ]; do
 	esac
 	shift
 done
+
+# --packages was given: drop empty entries from stray commas (e.g. "bash,,vim")
+# and fail loudly rather than silently stowing everything.
+if [ ${#SELECTED[@]} -gt 0 ]; then
+	clean=()
+	for p in "${SELECTED[@]}"; do
+		[ -n "$p" ] && clean+=("$p")
+	done
+	if [ ${#clean[@]} -eq 0 ]; then
+		echo "--packages: no package names given (see --list)" >&2
+		exit 2
+	fi
+	SELECTED=("${clean[@]}")
+fi
 
 # --- core: requirements and stow ------------------------------------------------
 
