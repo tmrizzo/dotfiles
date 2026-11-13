@@ -72,7 +72,7 @@ After installing tealdeer, fetch the sheet cache once with `tldr --update`.
 $ mkdir ~/git
 $ git clone https://github.com/tmrizzo/dotfiles
 $ cd ~/git/dotfiles
-$ stow -t ~ bash curl flatpak fontconfig git gtk konsole systemd terminator tmux vim zsh
+$ stow -t ~ bash btop curl flatpak fontconfig git gtk konsole lazygit systemd tealdeer terminator tmux vim zsh
 ```
 
 - The `stow -t DIR` sets the target directory to `DIR` instead of the parent of the stow directory, i.e `~` is the home directory.
