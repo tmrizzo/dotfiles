@@ -1,0 +1,61 @@
+# vim:ft=sh
+# ~/.bashrc.d/bash_env — editor, pager, colors and misc environment
+
+# Use the 256-color dircolors scheme when the terminal supports it
+if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]; then
+	eval "$(dircolors -b "${HOME}/.bashrc.d/dircolors.256dark")"
+	# The scheme's di=38;5;33 (dark blue) is hard to read on dark terminals;
+	# use a brighter blue for directories instead
+	LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=01;38;5;75"
+	# Same for its gray tones: plain files (244) and docs/configs (245) get
+	# brighter variants. Junk files (*.bak, *.swp, 240) stay dim on purpose.
+	LS_COLORS="${LS_COLORS//00;38;5;244/00;38;5;250}"
+	LS_COLORS="${LS_COLORS//01;38;5;245/01;38;5;254}"
+	export LS_COLORS
+fi
+
+# Make vim standard editor
+export EDITOR=vim
+
+# Make less the default pager
+export PAGER=less
+
+# Syntax-highlighted man pages via bat (when installed)
+command -v bat >/dev/null 2>&1 && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Use less pager with these options
+export LESS='-RSJMsi'
+# Stop less from creating its ~/.lesshst history file
+export LESSHISTFILE=-
+
+# less Colors for man Pages
+# Set colors when using gnome-terminal and terminator
+export GROFF_NO_SGR=1
+# Begin blinking
+#export LESS_TERMCAP_mb=$'\e[01;31m'
+export LESS_TERMCAP_mb=$'\e[1;32m'
+# Begin bold
+#export LESS_TERMCAP_md=$'\e[01;38;5;74m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+# End mode
+#export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_me=$'\e[0m'
+# End standout-mode
+#export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+# Begin standout-mode - info box
+#export LESS_TERMCAP_so=$'\e[38;5;246m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+# End underline
+#export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_ue=$'\e[0m'
+# Begin underline
+#export LESS_TERMCAP_us=$'\e[04;38;5;146m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# Correct TTY for pinentry (gpg and ssh-agent prompts)
+GPG_TTY=$(tty 2>/dev/null) && export GPG_TTY
+
+# Vagrant
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+export VAGRANT_PREFERRED_PROVIDERS=libvirt

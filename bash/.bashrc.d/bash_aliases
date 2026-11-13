@@ -127,24 +127,3 @@ command -v fd  >/dev/null 2>&1 && alias fihe='fd -i' && alias fif='fd -t f -i' &
 command -v rg  >/dev/null 2>&1 && alias cgrep='rg -v "^\s*(#|;|$)"'
 command -v duf  >/dev/null 2>&1 && alias df='duf'
 command -v dust >/dev/null 2>&1 && alias du='dust'
-
-# Detect the running distribution (see man os-release)
-OSCODENAME=""
-if [ -r /etc/os-release ]; then
-	. /etc/os-release
-	OSCODENAME="${ID:-}"
-fi
-case "$OSTYPE" in
-	cygwin*) OSCODENAME="cygwin" ;;
-esac
-
-case "${OSCODENAME}" in
-    fedora)
-		source ~/.bashrc.d/bash_aliases.fedora
-	;;
-    debian|ubuntu|pop)
-		source ~/.bashrc.d/bash_aliases.ubuntu
-	;;
-    *)
-	;;
-esac

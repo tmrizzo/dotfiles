@@ -48,19 +48,6 @@ shopt -s progcomp_alias
 
 shopt -s checkwinsize
 
-# Use the 256-color dircolors scheme when the terminal supports it
-if [[ "$TERM" == *256color* ]] && [[ -f "${HOME}/.bashrc.d/dircolors.256dark" ]]; then
-	eval "$(dircolors -b "${HOME}/.bashrc.d/dircolors.256dark")"
-	# The scheme's di=38;5;33 (dark blue) is hard to read on dark terminals;
-	# use a brighter blue for directories instead
-	LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=01;38;5;75"
-	# Same for its gray tones: plain files (244) and docs/configs (245) get
-	# brighter variants. Junk files (*.bak, *.swp, 240) stay dim on purpose.
-	LS_COLORS="${LS_COLORS//00;38;5;244/00;38;5;250}"
-	LS_COLORS="${LS_COLORS//01;38;5;245/01;38;5;254}"
-	export LS_COLORS
-fi
-
 # These completion tuning parameters change the default behavior of bash_completion:
 #
 # Define to access remotely checked-out files over passwordless ssh for CVS
@@ -81,44 +68,8 @@ fi
 # Install: dnf install fzf
 [[ -f /usr/share/fzf/shell/key-bindings.bash ]] && . /usr/share/fzf/shell/key-bindings.bash
 
-# Make vim standard editor
-export EDITOR=vim
-
-# Make less the default pager
-export PAGER=less
-
-# Syntax-highlighted man pages via bat (when installed)
-command -v bat >/dev/null 2>&1 && export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-# Use less pager with these options
-export LESS='-RSJMsi'
-# Stop less from creating its ~/.lesshst history file
-export LESSHISTFILE=-
-
-# less Colors for man Pages
-# Set colors when using gnome-terminal and terminator
-export GROFF_NO_SGR=1
-# Begin blinking
-#export LESS_TERMCAP_mb=$'\e[01;31m'
-export LESS_TERMCAP_mb=$'\e[1;32m'
-# Begin bold
-#export LESS_TERMCAP_md=$'\e[01;38;5;74m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-# End mode
-#export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_me=$'\e[0m'
-# End standout-mode
-#export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-# Begin standout-mode - info box
-#export LESS_TERMCAP_so=$'\e[38;5;246m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-# End underline
-#export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_ue=$'\e[0m'
-# Begin underline
-#export LESS_TERMCAP_us=$'\e[04;38;5;146m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
+# Environment: editor, pager, colors, misc (EDITOR, PAGER, LESS*, LS_COLORS, ...)
+[[ -f "${HOME}/.bashrc.d/bash_env" ]] && . "${HOME}/.bashrc.d/bash_env"
 
 # History Options
 # Ignore duplicates and spaces-prefixed lines; erase older duplicates.
@@ -146,11 +97,26 @@ export HISTSIZE=1000000
 
 # Let the terminal / multiplexer set TERM; do not force xterm-256color.
 
-# Correct TTY for pinentry (gpg and ssh-agent prompts)
-GPG_TTY=$(tty 2>/dev/null) && export GPG_TTY
-
 # Aliases
 [[ -f "${HOME}/.bashrc.d/bash_aliases" ]] && . "${HOME}/.bashrc.d/bash_aliases"
+
+# Distro-specific aliases: detect the running distribution (see man os-release)
+OSCODENAME=""
+if [ -r /etc/os-release ]; then
+	. /etc/os-release
+	OSCODENAME="${ID:-}"
+fi
+case "$OSTYPE" in
+	cygwin*) OSCODENAME="cygwin" ;;
+esac
+case "${OSCODENAME}" in
+	fedora)
+		[[ -f "${HOME}/.bashrc.d/bash_aliases.fedora" ]] && . "${HOME}/.bashrc.d/bash_aliases.fedora"
+		;;
+	debian|ubuntu|pop)
+		[[ -f "${HOME}/.bashrc.d/bash_aliases.ubuntu" ]] && . "${HOME}/.bashrc.d/bash_aliases.ubuntu"
+		;;
+esac
 
 # Functions
 [[ -f "${HOME}/.bashrc.d/bash_functions" ]] && . "${HOME}/.bashrc.d/bash_functions"
@@ -175,7 +141,3 @@ command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
 # /etc/profile sets 022, removing write perms to group + others.
 # Set a more restrictive umask: i.e. no exec perms for others:
 #umask 027
-
-# Vagrant
-export VAGRANT_DEFAULT_PROVIDER=libvirt
-export VAGRANT_PREFERRED_PROVIDERS=libvirt

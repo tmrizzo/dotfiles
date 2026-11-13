@@ -132,6 +132,7 @@ $ fc-cache -f
 ```
 ~/.bashrc.d/bash_aliases        # general aliases (+ .fedora / .ubuntu variants)
 ~/.bashrc.d/bash_functions      # helper functions
+~/.bashrc.d/bash_env            # editor, pager, colors and misc environment
 ~/.bashrc.d/bash_path           # PATH / MANPATH / INFOPATH (single source of truth)
 ~/.bashrc.d/bash_prompts        # PROMPT_COMMAND, git prompt, terminal title
 ~/.bashrc.d/secrets.vars        # local secrets (gitignored)
