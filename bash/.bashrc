@@ -124,7 +124,7 @@ esac
 # Prompts (sets PROMPT_COMMAND, including history -a)
 [[ -f "${HOME}/.bashrc.d/bash_prompts" ]] && . "${HOME}/.bashrc.d/bash_prompts"
 
-# Local env / secrets (gitignored) — brew shellenv lives here
+# Local env / secrets (gitignored) — brew shellenv lives in bash_path
 [[ -f "${HOME}/.bashrc.d/secrets.vars" ]] && . "${HOME}/.bashrc.d/secrets.vars"
 
 # Claude Code (Vertex) environment, if installed

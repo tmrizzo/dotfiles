@@ -15,6 +15,13 @@ __path_append() {
 	esac
 }
 
+# Homebrew (Linux): PATH, MANPATH/INFOPATH and HOMEBREW_* prefixes.
+# Guarded so machines without brew skip it. Sourced before the user-bin
+# prepends below, so ~/.local/bin etc. still take precedence over brew.
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+fi
+
 [ -d "${HOME}/usr/bin" ] && __path_prepend "${HOME}/usr/bin"
 [ -d "${HOME}/.local/bin" ] && __path_prepend "${HOME}/.local/bin"
 [ -d "${HOME}/android-studio/bin" ] && __path_prepend "${HOME}/android-studio/bin"
