@@ -100,7 +100,7 @@
     scrollbar_position = hidden
     show_titlebar = False
     use_system_font = False
-  [[tmrizzo_orig]]
+  [[main_orig]]
     background_darkness = 0.8
     background_type = transparent
     copy_on_selection = True

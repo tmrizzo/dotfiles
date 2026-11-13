@@ -5,7 +5,7 @@ WordMode=true
 WordModeAttr=true
 
 [General]
-Name=tmrizzo
+Name=main
 Parent=FALLBACK/
 
 [Terminal Features]
