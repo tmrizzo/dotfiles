@@ -10,3 +10,11 @@ weechat/*
 # Local secrets / machine tokens (never commit)
 /bash/.bashrc.d/*.vars
 
+# Proprietary fonts — never commit (public repo, no redistribution rights)
+/fonts/.local/share/fonts/Microsoft/
+/fonts/.local/share/fonts/Segoe-UI/
+/fonts/.local/share/fonts/SF-Pro/
+/fonts/.local/share/fonts/SF-Mono/
+/fonts/.local/share/fonts/New-York/
+/fonts/.local/share/fonts/Graphik*/
+

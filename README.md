@@ -6,7 +6,8 @@ published at [tmrizzo/dotfiles](https://github.com/tmrizzo/dotfiles).
 ### Packages
 
 `bash`, `zsh`, `vim`, `tmux`, `git`, `terminator`, `fontconfig`, `gtk`,
-`konsole`, `curl`, `flatpak`, `systemd`, `btop`, `lazygit`, `tealdeer`, `tldr`.
+`konsole`, `curl`, `flatpak`, `systemd`, `btop`, `lazygit`, `tealdeer`, `tldr`,
+`fonts`.
 Every top-level directory is a stow package — new ones are picked up
 automatically by `install.sh`.
 

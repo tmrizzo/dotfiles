@@ -37,9 +37,11 @@ These dotfiles are stow-managed and published to a public GitHub repository
 - Never run history-rewriting commands (`git filter-repo`,
   `git push --force`, `git reset --hard` on shared refs) — flag the need
   and let the user decide.
-- Do not commit machine-local state: undo/swap/backup dirs, font binaries,
+- Do not commit machine-local state: undo/swap/backup dirs,
   caches, `bookmarks`, `servers`, or anything generated at runtime. These
-  belong in `.gitignore`.
+  belong in `.gitignore`. Font binaries are allowed in the `fonts` package
+  but only open-licensed families (OFL, Apache, UFL) with their license
+  files — never proprietary fonts (Microsoft, Apple, commercial foundries).
 - Do not commit work-related configuration, internal hostnames, VPN
   endpoints, or employer-identifying settings. Work identities live in
   gitignored files outside this repo (e.g. `~/.gitconfig-work`).
