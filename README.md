@@ -92,9 +92,10 @@ other, not both. After installing either, fetch the sheet cache once with
    $ chmod 600 ~/.bashrc.d/secrets.vars
    ```
 
-2. **Fonts** — fonts live in `~/.local/share/fonts` (XDG standard, declared
-   in `fontconfig/.config/fontconfig/fonts.conf`). Copy your fonts there and
-   run `fc-cache -f` (done automatically by `install.sh`).
+2. **Fonts** — font families are managed by the `fonts` stow package
+   (open-licensed, with license files; see `fonts/.local/share/fonts/README.md`)
+   and land in `~/.local/share/fonts` automatically. Machine-local fonts can
+   still be dropped there directly; run `fc-cache -f` after either way.
 
 3. **Start a new shell** so `~/.bashrc` and `~/.inputrc` are picked up (or
    reload manually with `bind -f ~/.inputrc` and `src`).

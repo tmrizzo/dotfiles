@@ -81,7 +81,7 @@ set backspace=indent,eol,start         " Allow backspacing over everything in in
 set ttyfast                            " Optimize for fast terminal connections
 set history=2000                       " Keep 2000 lines of command line history
 
-set modeline                           " Respect modelines embeded in buffers
+set nomodeline                          " Ignore modelines in files (untrusted input)
 set noerrorbells                       " Disable error bells
 set nostartofline                      " Don’t reset cursor to start of line when moving around.
 
