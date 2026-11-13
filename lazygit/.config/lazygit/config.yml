@@ -20,17 +20,15 @@ gui:
       - "#49483E"
   border: rounded
   showRandomTip: false
-
 git:
-  paging:
-    colorArg: always
+  diffRenderers:
+    - colorArg: always
+      type: rawGit
   autoFetch: true
   branchLogCmd: "git lg1"
-
 os:
   editCommand: vim
   editAtLine: vim
-
 refactor:
   # jump-to-next-conflict helpers
   jumpToNextConflict: true
