@@ -2,6 +2,31 @@
 # Some example functions:
 #
 
+# Update every package manager present on this machine, in one command.
+# Each manager is skipped silently when not installed.
+up() {
+	local failed=0
+	if command -v dnf >/dev/null 2>&1; then
+		echo "==> dnf"
+		sudo dnf upgrade --refresh || failed=1
+	fi
+	if command -v flatpak >/dev/null 2>&1; then
+		echo "==> flatpak"
+		flatpak update -y || failed=1
+	fi
+	if command -v brew >/dev/null 2>&1; then
+		echo "==> brew"
+		brew update && brew upgrade || failed=1
+	fi
+	if command -v tldr >/dev/null 2>&1; then
+		echo "==> tldr pages"
+		tldr --update 2>/dev/null || true
+	fi
+	# flatpak runtime cleanup runs weekly via the systemd user timer
+	(( failed )) && echo "up: some managers failed — check output above" >&2
+	return "$failed"
+}
+
 # AICT shell functions (auto-installed by aict.sh; kept here to avoid duplication)
 unalias aict 2>/dev/null
 unalias aimt 2>/dev/null
