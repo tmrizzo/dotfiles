@@ -88,6 +88,24 @@ timer() {
 	sleep "$t" && notify-send "Timer" "⏰ ${1} elapsed"
 }
 
+# --- SELinux troubleshooting -------------------------------------------------
+# Requires: dnf install setroubleshoot-server policycoreutils-python-utils audit
+# Workflow: avc (see denials) -> selwhy (why) -> selalert (detailed fix) ->
+#           selreset (fix file contexts) or selallow (generate a policy module)
+# Recent AVC denials (audit log is root-only)
+avc()      { sudo ausearch -m avc,user_avc,selinux_err -ts recent; }
+# Plain-English explanation of the recent denials
+selwhy()   { sudo ausearch -m avc -ts recent | audit2why; }
+# setroubleshoot analysis with suggested fixes for every denial
+selalert() { sealert -l '*'; }
+# Fix file contexts recursively under a path (most "wrong label" fixes)
+selreset() { sudo restorecon -Rv "$@"; }
+# Expected SELinux context of a path, per current policy
+selctx()   { matchpathcon "$@"; }
+# Draft a local policy module from recent denials — review before applying!
+# (audit2allow -M mymod <output> && semodule -i mymod.pp)
+selallow() { sudo ausearch -m avc -ts recent | audit2allow; }
+
 16colors() {
     #Background
     for bg in {40..47} {100..107} 49; do

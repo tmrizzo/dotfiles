@@ -60,6 +60,10 @@ Prefer manual stow? `stow -t ~ --restow vim` (or `*/` for everything).
 - `yt-dlp` — used by the `getmp3` alias
 - `up` — update every installed package manager (dnf, flatpak, brew) in
   one command; each is skipped when absent (`~/.bashrc.d/bash_functions`)
+- SELinux troubleshooting — `avc` (recent denials), `selwhy` (plain-English
+  cause), `selalert` (detailed fixes), `selreset` (fix file labels),
+  `selctx` (expected label), `selallow` (draft policy module); needs
+  `dnf install setroubleshoot-server policycoreutils-python-utils audit`
 - `git-credential-libsecret` — persistent encrypted git credentials (enable
   with `git config --global credential.helper libsecret`; default is `cache`)
 - archive tools for the `ex` extractor function; `minikube` completion ships
