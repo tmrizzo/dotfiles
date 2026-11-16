@@ -113,7 +113,13 @@ alias myip='curl -s ifconfig.me'
 
 # systemd / journal
 alias jctl='journalctl -p 3 -xb'                    # this boot's errors
+alias jx='journalctl -b -p err -x'                  # same, with extra explanations
+alias jp='journalctl -b -1 -p 3'                    # previous boot's errors
+alias jboots='journalctl --list-boots'              # boot index (for journalctl -b N)
+alias ju='journalctl -u'                            # unit logs: ju sshd, ju nginx -f
 alias juser='journalctl --user -b'                  # user unit logs
+alias jf='journalctl -f'                            # follow live (add -u unit / -p err)
+alias jdu='journalctl --disk-usage'                 # journal disk usage
 alias boottime='systemd-analyze blame | head -15'   # slowest boot services
 
 # toolbox

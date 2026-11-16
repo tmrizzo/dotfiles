@@ -64,6 +64,10 @@ Prefer manual stow? `stow -t ~ --restow vim` (or `*/` for everything).
   cause), `selalert` (detailed fixes), `selreset` (fix file labels),
   `selctx` (expected label), `selallow` (draft policy module); needs
   `dnf install setroubleshoot-server policycoreutils-python-utils audit`
+- journal — `jctl`/`jx`/`jp` (this/previous boot errors, with/without
+  explanations), `jboots` (boot index), `ju` (unit logs), `jf` (follow
+  live), `jdu` (disk usage), `jg` (grep this boot's messages), `juser`,
+  `boottime`
 - `git-credential-libsecret` — persistent encrypted git credentials (enable
   with `git config --global credential.helper libsecret`; default is `cache`)
 - archive tools for the `ex` extractor function; `minikube` completion ships

@@ -88,6 +88,9 @@ timer() {
 	sleep "$t" && notify-send "Timer" "⏰ ${1} elapsed"
 }
 
+# Search this boot's log messages: jg 'timeout', jg -i 'nvme|ssd'
+jg() { journalctl -b --grep "$@"; }
+
 # --- SELinux troubleshooting -------------------------------------------------
 # Requires: dnf install setroubleshoot-server policycoreutils-python-utils audit
 # Workflow: avc (see denials) -> selwhy (why) -> selalert (detailed fix) ->
