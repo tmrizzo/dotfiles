@@ -17,6 +17,12 @@ fi
 # Make vim standard editor
 export EDITOR=vim
 
+# Directory name shortcuts for 'cd dow' / 'cd doc' / 'cd git'
+# (cdable_vars in ~/.bashrc and setopt cdablevars in ~/.zshrc)
+export dow=$HOME/Downloads
+export doc=$HOME/Documents
+export git=$HOME/git
+
 # Make less the default pager
 export PAGER=less
 

@@ -86,6 +86,7 @@ source $ZSH/oh-my-zsh.sh
 
 # QoL options (parity with the bash package)
 setopt auto_cd          # type a directory name alone to cd into it
+setopt cdablevars       # 'cd dow' works for exported dir vars (bash_env)
 setopt correct          # command typo correction
 export LESSHISTFILE=-   # stop less from creating ~/.lesshst
 
@@ -157,10 +158,6 @@ unset -f __path_prepend __path_append
 # Set a more restrictive umask: i.e. no exec perms for others:
 #umask 027
 
-# Vagrant
-# Global Vagrant variables
-# Configures the default provider Vagrant will use.
-export VAGRANT_DEFAULT_PROVIDER=libvirt
-
-# Configures providers that Vagrant should prefer
-export VAGRANT_PREFERRED_PROVIDERS=libvirt
+# zoxide: smarter cd with history (z dotf) — parity with the bash package
+# Install: dnf install zoxide
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"

@@ -52,6 +52,8 @@ alias lsag="ls -a | grep -i"
 #
 # Go back 1 directory level (for fast typers)
 alias cd..='cd ../'
+# Previous directory (like cd -)
+alias -- -='cd -'
 # Go back 1 directory level
 alias ..='cd ../'
 # Go back 2 directory levels

@@ -54,7 +54,8 @@ Prefer manual stow? `stow -t ~ --restow vim` (or `*/` for everything).
 ```
 
 - `fzf` — fuzzy `Ctrl-R` history and `Alt-C` directory jump
-- `zoxide` — smarter `cd` (`z dotf`)
+- `zoxide` — smarter `cd` (`z dotf`) in bash and zsh; `cd dow` / `cd doc` /
+  `cd git` via `cdable_vars` (shortcut vars in `~/.bashrc.d/bash_env`)
 - `bat` / `fd-find` / `ripgrep` — modern `cat` / `find` / `grep`; aliases
   switch over automatically
 - `yt-dlp` — used by the `getmp3` alias

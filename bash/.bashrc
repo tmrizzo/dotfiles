@@ -37,6 +37,8 @@ shopt -s cdspell
 shopt -s dirspell
 # Type a directory name alone to cd into it
 shopt -s autocd
+# 'cd dow' works for exported dir vars (dow/doc/git in bash_env)
+shopt -s cdable_vars
 # **/*.conf matches recursively
 shopt -s globstar
 # A bare Tab on an empty line does not try to complete everything
