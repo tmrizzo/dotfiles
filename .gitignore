@@ -9,6 +9,10 @@ weechat/*
 
 # Local secrets / machine tokens (never commit)
 /bash/.bashrc.d/*.vars
+# Any file or directory starting with "secrets" anywhere in the repo,
+# except the committed example templates
+secrets*
+!secrets*.example
 
 # Proprietary fonts — never commit (public repo, no redistribution rights)
 /fonts/.local/share/fonts/Microsoft/
