@@ -18,3 +18,35 @@ weechat/*
 /fonts/.local/share/fonts/New-York/
 /fonts/.local/share/fonts/Graphik*/
 
+# Credentials and key material — never commit
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+**/.netrc
+**/.npmrc
+**/.pypirc
+**/.aws/
+**/.kube/
+**/.docker/
+**/.gnupg/
+**/.ssh/
+
+# Shell/editor history and state — can contain interactively typed secrets
+**/.bash_history
+**/.zsh_history
+**/.python_history
+**/.node_repl_history
+**/.lesshst
+**/.viminfo
+**/.wget-hsts
+*.swp
+
+# Local-only files referenced by the tracked configs
+/tmux/.tmux.private
+/zsh/.zshrc.d/*.vars
+**/.config/claude-code-vertex/env.sh
+
+
